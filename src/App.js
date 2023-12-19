@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import SurveyIntro from './Pages/SurveyIntro';
 import PersonalDetails from './Pages/PersonalDetails';
 import ExamplePage from './Pages/ExamplePage';
 import QuestionPage from './Pages/QuestionPage';
 import FinishPage from './Pages/FinishPage'; // Import FinishPage
 import StartPage from './Pages/StartPage';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function App() {
   const [currentStep, setCurrentStep] = useState(0);
   const [surveyData, setSurveyData] = useState({});
-  // const navigate = useNavigate(); // For redirection
+  const [urlParams, setUrlParams] = useState({});
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setUrlParams({
+      PROLIFIC_PID: params.get('PROLIFIC_PID'),
+      STUDY_ID: params.get('STUDY_ID'),
+      SESSION_ID: params.get('SESSION_ID')
+    });
+  }, []);
   const handleIntroComplete = () => {
     setCurrentStep(1); // Move to PersonalDetails
   };
@@ -37,7 +46,11 @@ function App() {
   };
 
   const handleFinishPageComplete = (finishData) => {
-    const completedSurveyData = { ...surveyData, finishPage: finishData };
+    const completedSurveyData = { 
+      ...surveyData, 
+      finishPage: finishData,
+      ...urlParams
+    };
 
     // Send data to the server
     fetch("https://24d6houomeioliarmgrwonbi7m0nmblf.lambda-url.eu-central-1.on.aws/", {
@@ -47,8 +60,8 @@ function App() {
     })
     .then(response => response.json())
     .then(data => {
-      if (data.redirect_link) {
-        // navigate(data.redirect_link); // Redirect to the link provided by the server
+      if (data.completionLink) {
+        window.location.href = data.completionLink;
       }
     })
     .catch(error => console.error('Error:', error));

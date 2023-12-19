@@ -51,8 +51,17 @@ const customTypographyStyle = {
   fontSize: '16px',
   fontFamily: 'Open Sans, sans-serif',
 };
-
-const RatingScale = ({ questionText, description, readOnly, error, onValueChange, explanation, selectedValue }) => {
+const RatingScale = ({ 
+  questionText, 
+  description, 
+  readOnly, 
+  error, 
+  onValueChange, 
+  explanation, 
+  selectedValue, 
+  questionNumber,  // New prop for the current question number
+  totalQuestions   // New prop for the total number of questions
+}) => {
   const [localSelectedValue, setLocalSelectedValue] = useState(selectedValue);
 
   useEffect(() => {
@@ -78,7 +87,16 @@ const RatingScale = ({ questionText, description, readOnly, error, onValueChange
         </ErrorBox>
       )}
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', p: 2, boxShadow: 3, borderRadius: 2, backgroundColor: 'background.paper', width: '50vw', maxWidth: '700px', padding: '32px 40px', fontFamily: 'Open Sans, sans-serif', margin: 'auto', marginTop: '20px', marginBottom: '20px', whiteSpace: 'pre-wrap'}}>
-        <Typography variant="" sx={customTypographyStyle}>Argument (###): {questionText}</Typography>
+        <Typography variant="" sx={customTypographyStyle}>
+          {questionNumber != null && totalQuestions != null ? 
+            `Argument (${questionNumber}/${totalQuestions}): ${questionText}` : 
+            questionText}
+        </Typography>
+        {description && (
+          <Typography variant="" sx={{ color: '#00000073', mb: 2, fontSize: '14px', fontFamily: 'Open Sans, sans-serif'}}>
+            {description}
+          </Typography>
+        )}
         {description && (
           <Typography variant="" sx={{ color: '#00000073', mb: 2, fontSize: '14px', fontFamily: 'Open Sans, sans-serif'}}>
             {description}

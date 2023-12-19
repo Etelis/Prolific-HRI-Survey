@@ -15,20 +15,31 @@ const QuestionPage = ({ jsonFileName, onComplete }) => {
     const [responses, setResponses] = useState([]);
     const [showAdditionalInput, setShowAdditionalInput] = useState(false);
     const [additionalInput, setAdditionalInput] = useState('');
+    const [questionStartTime, setQuestionStartTime] = useState(Date.now());
+    const [totalQuestions, setTotalQuestions] = useState(0);
+    const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
 
-        useEffect(() => {
-            const loadScenarios = async () => {
-                const data = await import(`./${jsonFileName}`);
-                const shuffledScenarios = data.scenarios.map(scenario => ({
-                    ...scenario,
-                    questionCategories: shuffleArray(scenario.questionCategories)
-                }));
-                setScenarios(shuffledScenarios);
-                pickRandomQuestion(0, 0, shuffledScenarios);
-            };
-    
-            loadScenarios();
-        }, [jsonFileName]);
+    useEffect(() => {
+        const loadScenarios = async () => {
+            const data = await import(`./${jsonFileName}`);
+            const shuffledScenarios = data.scenarios.map(scenario => ({
+                ...scenario,
+                questionCategories: shuffleArray(scenario.questionCategories)
+            }));
+            setScenarios(shuffledScenarios);
+            pickRandomQuestion(0, 0, shuffledScenarios);
+            
+            // Calculate total questions
+            const total = data.scenarios.reduce((sum, scenario) => {
+                return sum + scenario.questionCategories.reduce((sumCat, category) => {
+                    return sumCat + category.questions.length;
+                }, 0);
+            }, 0);
+            setTotalQuestions(total);
+        };
+
+        loadScenarios();
+    }, [jsonFileName]);
 
   const shuffleArray = (array) => {
     let currentIndex = array.length, randomIndex;
@@ -51,16 +62,20 @@ const QuestionPage = ({ jsonFileName, onComplete }) => {
         const category = scenariosData[scenarioIndex].questionCategories[categoryIndex];
         const randomQuestionIndex = Math.floor(Math.random() * category.questions.length);
         setCurrentQuestion(category.questions[randomQuestionIndex]);
-        setSelectedRating(null); // Reset the rating when a new question is picked
+        setSelectedRating(null); // Reset the rating
+        setQuestionStartTime(Date.now()); // Set start time for the question
     }
 };
-
 
     const handleRatingChange = (value) => {
         setSelectedRating(value);
     };
 
     const handleNextClick = () => {
+        const timeTaken = Date.now() - questionStartTime; // Calculate time taken
+        const currentScenario = scenarios[currentScenarioIndex];
+        const currentCategory = currentScenario.questionCategories[currentCategoryIndex];
+        
         if (showAdditionalInput) {
             // Save the additional input
             const additionalResponse = {
@@ -73,21 +88,23 @@ const QuestionPage = ({ jsonFileName, onComplete }) => {
 
             // Move to the next scenario
             moveToNextScenario();
+            if (currentQuestionNumber < totalQuestions) {
+                setCurrentQuestionNumber(currentQuestionNumber + 1);
+            }
             return;
         }
-
         // Saving the response for the current question
         const currentResponse = {
             scenarioId: currentScenarioIndex,
-            categoryId: currentCategoryIndex,
-            questionId: currentQuestion.id,
-            rating: selectedRating
+            categoryName: currentCategory.categoryName,
+            questionId: currentQuestion.questionId,
+            rating: selectedRating,
+            timeTaken: timeTaken // Add time taken to the response
         };
 
         setResponses([...responses, currentResponse]);
         setSelectedRating(null); // Reset rating for the next question
-
-        const currentScenario = scenarios[currentScenarioIndex];
+        setQuestionStartTime(Date.now()); // Reset start time for the next question
         
         if (currentCategoryIndex < currentScenario.questionCategories.length - 1) {
             const nextCategoryIndex = currentCategoryIndex + 1;
@@ -156,6 +173,7 @@ const moveToNextScenario = () => {
                             <Button
                                 variant="outlined"
                                 color="secondary"
+                                disabled={additionalInput == ''}
                                 onClick={handleNextClick}
                             >
                                 Next

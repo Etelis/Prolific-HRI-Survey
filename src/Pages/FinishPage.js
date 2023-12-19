@@ -22,7 +22,7 @@ const FinishPage = ({ onComplete }) => {
     // Set a delay of 2 seconds before calling onComplete
     setTimeout(() => {
       const endTime = new Date();
-      const timeTaken = (endTime - startTime) / 1000; // Time taken in seconds
+      const timeTaken = (endTime - startTime); // Time taken in seconds
 
       // Call onComplete with feedback and time taken
       if (onComplete) {

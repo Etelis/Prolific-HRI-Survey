@@ -2,14 +2,14 @@
     "scenarios": [
         {
             "imageUrl": "https://i.ibb.co/ZLrpKB3/251d6ef7-b8cf-47ef-b3e2-5d8bcd5dd0e7.jpg",
-            "description": "Here, the robot needs help in pushing the elevator button.",
+            "description": "Here, the robot needs help in calling the elevator",
             "questionCategories": [
                 {
                     "categoryName": "Physical",
                     "questions": [
                         {
                             "questionId": "physical1",
-                            "questionText": "The robot is not tall enough to reach the elevator buttons",
+                            "questionText": "The robot is not tall enough to reach the elevator buttons.",
                             "description": "",
                             "explanation": false
                         },
@@ -28,28 +28,80 @@
                     ]
                 },
                 {
-                    "categoryName": "Path",
+                    "categoryName": "Cognitive",
                     "questions": [
                         {
-                            "questionId": "path1",
-                            "questionText": "If not using the elevator, the robot will need to take a longer alternative route",
+                            "questionId": "cognitive1",
+                            "questionText": "The robot cannot correctly read the numbers on the elevator buttons.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "cognitive2",
+                            "questionText": "The robot does not know how to call the elevator.",
                             "description": "",
                             "explanation": false
                         }
                     ]
                 },
                 {
-                    "categoryName": "Psychological",
+                    "categoryName": "Social_Influence",
                     "questions": [
                         {
-                            "questionId": "psychological1",
-                            "questionText": "Many people already walked by and none of them suggested help so far",
+                            "questionId": "SI1",
+                            "questionText": "This will encourage other people that are watching us to help others.",
                             "description": "",
                             "explanation": false
                         },
                         {
-                            "questionId": "psychological2",
-                            "questionText": "It's a crowded place, with a lot of people, but so far no one helped the robot",
+                            "questionId": "SI2",
+                            "questionText": "Helping is a good deed.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "SI3",
+                            "questionText": "God wants us to help each other.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Path",
+                    "questions": [
+                        {
+                            "questionId": "path1",
+                            "questionText": "If not using the elevator, the robot will need to take a longer alternative route.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "path2",
+                            "questionText": "Waiting for another person to assist the robot might take a while.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Pity",
+                    "questions": [
+                        {
+                            "questionId": "pity1",
+                            "questionText": "The robot's operator will be disappointed by the robot's poor performance.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "pity2",
+                            "questionText": "Many people already walked by and none of them suggested help.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "pity3",
+                            "questionText": "It's a crowded place, with a lot of people, but so far no one helped the robot.",
                             "description": "",
                             "explanation": false
                         }
@@ -60,19 +112,36 @@
                     "questions": [
                         {
                             "questionId": "low_urgency",
-                            "questionText": "The robot needs to pick an eCommerce delivery of a package to a customer.",
+                            "questionText": "The robot needs to water the plants on the upper floor.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "medium_urgency",
-                            "questionText": "The robot needs to restock essential medical supplies at a rural clinic",
+                            "questionText": "The robot needs to pick a document that needs to be signed, and the office located on the upper floor is about to close soon.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "high_urgency",
-                            "questionText": "The robot needs to pick a delivery of critical medication to a homebound patient",
+                            "questionText": "The robot needs to pick a newly donated transplant organ from the upper-floor surgical suite.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Level_Of_Interruption",
+                    "questions": [
+                        {
+                            "questionId": "loi1",
+                            "questionText": "It will only take a minute of your time.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "loi2",
+                            "questionText": "It's only a push of a button.",
                             "description": "",
                             "explanation": false
                         }
@@ -82,8 +151,14 @@
                     "categoryName": "risk",
                     "questions": [
                         {
-                            "questionId": "low_risk",
-                            "questionText": "There's no risk to you in helping;",
+                            "questionId": "risk1",
+                            "questionText": "There's no risk to you in helping.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "risk2",
+                            "questionText": "Helping the robot is completely safe.",
                             "description": "",
                             "explanation": false
                         }
@@ -100,19 +175,65 @@
                     "questions": [
                         {
                             "questionId": "physical1",
-                            "questionText": "The spill blocks the robot due to it's small legs",
+                            "questionText": "The robot has restricted movement capabilities and lacks the necessary reach to access the spill area.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "physical2",
-                            "questionText": "The robot cannot clean the spill due to it's manipulators are not precise enough",
+                            "questionText": "The robot's manipulators are not designed for the precision needed to clean the spill.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "physical3",
-                            "questionText": "The spill might may cause the robot to fall.",
+                            "questionText": "The robots is not designed to clean or overcome the spill.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Cognitive",
+                    "questions": [
+                        {
+                            "questionId": "cognitive1",
+                            "questionText": "The robot does not know how to clean the spill.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "cognitive2",
+                            "questionText": "The robot cannot correctly distinguish the spill from the floor.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "cognitive3",
+                            "questionText": "The robot cannot deal with unknown liquids that could be corrosive or conductive.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Cognitive_dup",
+                    "questions": [
+                        {
+                            "questionId": "cognitive1",
+                            "questionText": "The robot does not know how to clean the spill.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "cognitive2",
+                            "questionText": "The robot cannot correctly distinguish the spill from the floor.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "cognitive3",
+                            "questionText": "The robot cannot deal with unknown liquids that could be corrosive or conductive.",
                             "description": "",
                             "explanation": false
                         }
@@ -123,35 +244,13 @@
                     "questions": [
                         {
                             "questionId": "path1",
-                            "questionText": "The robot does not have alternative route to overcome the spill",
-                            "description": "",
-                            "explanation": false
-                        }
-                    ]
-                },
-                {
-                    "categoryName": "Psychological",
-                    "questions": [
-                        {
-                            "questionId": "psychological1",
-                            "questionText": "Many people already walked by and none of them suggested help so far",
+                            "questionText": "The robot does not have an alternative route to overcome the spill.",
                             "description": "",
                             "explanation": false
                         },
                         {
-                            "questionId": "psychological2",
-                            "questionText": "It's a crowded place, with a lot of people, but so far no one helped the robot",
-                            "description": "",
-                            "explanation": false
-                        }
-                    ]
-                },
-                {
-                    "categoryName": "Environmental",
-                    "questions": [
-                        {
-                            "questionId": "Environmental1",
-                            "questionText": "This area sees high foot traffic, the spill could be hazardous to people walking by.",
+                            "questionId": "path2",
+                            "questionText": "Waiting for another person to assist the robot might take a while.",
                             "description": "",
                             "explanation": false
                         }
@@ -162,19 +261,65 @@
                     "questions": [
                         {
                             "questionId": "low_urgency",
-                            "questionText": "The robot needs to pick an eCommerce delivery of a package to a customer.",
+                            "questionText": "The robot needs to water the plants on the upper floor.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "medium_urgency",
-                            "questionText": "The robot needs to attend a meeting, the meeting has modarate importance.",
+                            "questionText": "The robot needs to pick a document that needs to be signed, and the office located on the upper floor is about to close soon.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "high_urgency",
-                            "questionText": "The robot needs to pick a delivery of critical medication to a homebound patient",
+                            "questionText": "The robot needs to pick a newly donated transplant organ from the upper-floor surgical suite.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Pity",
+                    "questions": [
+                        {
+                            "questionId": "pity1",
+                            "questionText": "The spill is blocking the robot, and the robot's operator will be disappointed by the robot's poor performance.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "pity2",
+                            "questionText": "Many people already walked by and none of them suggested help.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "pity3",
+                            "questionText": "It's a crowded place, with a lot of people, but so far no one has helped the robot.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Social_Influence",
+                    "questions": [
+                        {
+                            "questionId": "SI1",
+                            "questionText": "This will encourage other people that are watching us to help others.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "SI2",
+                            "questionText": "Helping is a good deed.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "SI3",
+                            "questionText": "God wants us to help each other.",
                             "description": "",
                             "explanation": false
                         }
@@ -184,31 +329,31 @@
                     "categoryName": "risk",
                     "questions": [
                         {
-                            "questionId": "low_risk",
+                            "questionId": "risk1",
                             "questionText": "Cleaning up this spill is a safe task, posing no risk to those who assist.",
                             "description": "",
                             "explanation": false
                         },
                         {
-                            "questionId": "low_risk",
-                            "questionText": "The spill is of unknown liquid, might pose risk to your clothes.",
+                            "questionId": "risk2",
+                            "questionText": "Helping the robot is completely safe.",
                             "description": "",
                             "explanation": false
                         }
                     ]
                 },
                 {
-                    "categoryName": "time",
+                    "categoryName": "Level_Of_Interruption",
                     "questions": [
                         {
-                            "questionId": "low_time",
-                            "questionText": "Assisting the robot with the spill would take just a moment of your time.",
+                            "questionId": "loi1",
+                            "questionText": "Cleaning the spill would take several minutes of your time.",
                             "description": "",
                             "explanation": false
                         },
                         {
-                            "questionId": "modarate_time",
-                            "questionText": "Assisting the robot with the spill would require finding paper, it would take severl minutes.",
+                            "questionId": "loi2",
+                            "questionText": "Cleaning only requires grabbing a mop and would take several minutes.",
                             "description": "",
                             "explanation": false
                         }
@@ -225,19 +370,42 @@
                     "questions": [
                         {
                             "questionId": "physical1",
-                            "questionText": "The robot does not have the required amount of strenght to open the door.",
+                            "questionText": "The robot does not have the required amount of strength to open the door.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "physical2",
-                            "questionText": "The robot cannot open the door due to it's manipulators are not precise enough.",
+                            "questionText": "The robot cannot open the door due to its manipulators not precise enough.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "physical3",
-                            "questionText": "The robot does not have sufficient permissions to open the door.",
+                            "questionText": "The robot cannot physically reach the door handle.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Cognitive",
+                    "questions": [
+                        {
+                            "questionId": "cognitive1",
+                            "questionText": "The robot does not know how to handle this kind of door.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "cognitive2",
+                            "questionText": "The robot has never seen a door like that, and doesn't know how to handle it.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "cognitive3",
+                            "questionText": "The robot does not know how to grab this kind of door handle.",
                             "description": "",
                             "explanation": false
                         }
@@ -248,30 +416,30 @@
                     "questions": [
                         {
                             "questionId": "path1",
-                            "questionText": "The robot does not have alternative route to overcome the door.",
+                            "questionText": "The robot does not have an alternative route - only by opening the door it can reach its destination.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "path2",
-                            "questionText": "If not using the elevator, the robot will need to take a longer alternative route.",
+                            "questionText": "Waiting for another person to assist the robot might take a while.",
                             "description": "",
                             "explanation": false
                         }
                     ]
                 },
                 {
-                    "categoryName": "Psychological",
+                    "categoryName": "Path_dup",
                     "questions": [
                         {
-                            "questionId": "psychological1",
-                            "questionText": "Many people already walked by and none of them suggested help so far.",
+                            "questionId": "path1",
+                            "questionText": "The robot does not have an alternative route - only by opening the door it can reach its destination.",
                             "description": "",
                             "explanation": false
                         },
                         {
-                            "questionId": "psychological2",
-                            "questionText": "It's a crowded place, with a lot of people, but so far no one helped the robot.",
+                            "questionId": "path2",
+                            "questionText": "Waiting for another person to assist the robot might take a while.",
                             "description": "",
                             "explanation": false
                         }
@@ -282,19 +450,65 @@
                     "questions": [
                         {
                             "questionId": "low_urgency",
-                            "questionText": "The robot needs to pick an eCommerce delivery of a package to a customer.",
+                            "questionText": "The robot needs to water the plants on the upper floor.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "medium_urgency",
-                            "questionText": "The robot needs to attend a meeting, the meeting has modarate importance.",
+                            "questionText": "The robot needs to pick a document that needs to be signed, and the office located on the upper floor is about to close soon.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "high_urgency",
-                            "questionText": "The robot needs to pick a delivery of critical medication to a homebound patient",
+                            "questionText": "The robot needs to pick a newly donated transplant organ from the upper-floor surgical suite.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Pity",
+                    "questions": [
+                        {
+                            "questionId": "pity1",
+                            "questionText": "The robot's operator will be disappointed by the robot's poor performance.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "pity2",
+                            "questionText": "Many people already walked by and none of them suggested help.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "pity3",
+                            "questionText": "It's a crowded place, with a lot of people, but so far no one has helped the robot.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Social_Influence",
+                    "questions": [
+                        {
+                            "questionId": "SI1",
+                            "questionText": "This will encourage other people that are watching us to help others.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "SI2",
+                            "questionText": "Helping is a good deed.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "SI3",
+                            "questionText": "God wants us to help each other.",
                             "description": "",
                             "explanation": false
                         }
@@ -304,31 +518,31 @@
                     "categoryName": "risk",
                     "questions": [
                         {
-                            "questionId": "low_risk",
-                            "questionText": "Opening the door woudn't pose any risk to you.",
+                            "questionId": "risk1",
+                            "questionText": "Opening the door would not pose any risk to you.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "risk2",
+                            "questionText": "Helping the robot is completely safe.",
                             "description": "",
                             "explanation": false
                         }
                     ]
                 },
                 {
-                    "categoryName": "time",
+                    "categoryName": "Level_Of_Interruption",
                     "questions": [
                         {
-                            "questionId": "low_time",
-                            "questionText": "Opening the door would take just a moment of your time.",
+                            "questionId": "loi1",
+                            "questionText": "It will only take a minute of your time.",
                             "description": "",
                             "explanation": false
                         },
                         {
-                            "questionId": "modarate_time",
-                            "questionText": "The door has limited access, Opening it would require few minutes.",
-                            "description": "",
-                            "explanation": false
-                        },
-                        {
-                            "questionId": "high_time",
-                            "questionText": "The door is jammed, Opening it would require substential amount of time.",
+                            "questionId": "loi2",
+                            "questionText": "The door is not locked - just use the handle.",
                             "description": "",
                             "explanation": false
                         }
@@ -345,19 +559,36 @@
                     "questions": [
                         {
                             "questionId": "physical1",
-                            "questionText": "The robot lacks the sensory capability to identify the material it holds",
+                            "questionText": "The robot lacks the precision to handle delicate or very small items.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "physical2",
-                            "questionText": "The robot is unable to differentiate between plastic and glass materials by touch.",
+                            "questionText": "The robot cannot grasp such a small item to sort it.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Cognitive",
+                    "questions": [
+                        {
+                            "questionId": "cognitive1",
+                            "questionText": "The robot easily mix between different materials.",
                             "description": "",
                             "explanation": false
                         },
                         {
-                            "questionId": "physical3",
-                            "questionText": "The robot lacks the precision to handle delicate or very small items.",
+                            "questionId": "cognitive2",
+                            "questionText": "The robot get confused when having to distinguish between parts of similar shapes.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "cognitive3",
+                            "questionText": "The robot does not have the computation power to differentiate between materials.",
                             "description": "",
                             "explanation": false
                         }
@@ -368,30 +599,19 @@
                     "questions": [
                         {
                             "questionId": "path1",
-                            "questionText": "The robot faces longer processing times due to complex sorting algorithms for certain items.",
+                            "questionText": "The robot simply cannot carry out this task without help.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "path2",
-                            "questionText": "The robot's efficiency is reduced when handling items that require detailed analysis, leading to delays.",
-                            "description": "",
-                            "explanation": false
-                        }
-                    ]
-                },
-                {
-                    "categoryName": "Psychological",
-                    "questions": [
-                        {
-                            "questionId": "psychological1",
-                            "questionText": "Many people already walked by and none of them suggested help so far",
+                            "questionText": "Waiting for another person to assist the robot might take a while.",
                             "description": "",
                             "explanation": false
                         },
                         {
-                            "questionId": "psychological2",
-                            "questionText": "It's a crowded place, with a lot of people, but so far no one helped the robot",
+                            "questionId": "path3",
+                            "questionText": "The robot can run its parts recognition code but it will take a few minutes running it.",
                             "description": "",
                             "explanation": false
                         }
@@ -402,19 +622,88 @@
                     "questions": [
                         {
                             "questionId": "low_urgency",
-                            "questionText": "The robot assists in a library by returning books to their proper shelves.",
+                            "questionText": "The robot needs to find a spare part of an old toy.",
                             "description": "",
                             "explanation": false
                         },
                         {
-                            "questionId": "moderate_urgency",
-                            "questionText": "The robot performs routine maintenance checks on industrial machinery to prevent breakdowns.",
+                            "questionId": "medium_urgency",
+                            "questionText": "The robot needs to pick a machine part that is needed for a technician arriving tomorrow.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "high_urgency",
-                            "questionText": "The robot is involved in a search and rescue operation in a disaster zone to find survivors.",
+                            "questionText": "The robot needs to pick a part urgently required for fixing a faulty respirator.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Pity",
+                    "questions": [
+                        {
+                            "questionId": "pity1",
+                            "questionText": "The robot's operator will be disappointed by the robot's poor performance, if unable to categorise the part.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "pity2",
+                            "questionText": "Many people already walked by and none of them suggested help.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "pity3",
+                            "questionText": "It's a crowded place, with a lot of people, but so far no one has helped the robot.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Pity_dup",
+                    "questions": [
+                        {
+                            "questionId": "pity1",
+                            "questionText": "The robot's operator will be disappointed by the robot's poor performance, if unable to categorise the part.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "pity2",
+                            "questionText": "Many people already walked by and none of them suggested help.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "pity3",
+                            "questionText": "It's a crowded place, with a lot of people, but so far no one has helped the robot.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Social_Influence",
+                    "questions": [
+                        {
+                            "questionId": "SI1",
+                            "questionText": "This will encourage other people that are watching us to help others.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "SI2",
+                            "questionText": "Helping is a good deed.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "SI3",
+                            "questionText": "God wants us to help each other.",
                             "description": "",
                             "explanation": false
                         }
@@ -424,43 +713,31 @@
                     "categoryName": "risk",
                     "questions": [
                         {
-                            "questionId": "low_risk_human",
-                            "questionText": "The robot, while sorting recyclables, asks a passerby for help with a non-hazardous item, posing low risk to the human.",
+                            "questionId": "risk1",
+                            "questionText": "Identifying the item would not pose any risk to you.",
                             "description": "",
                             "explanation": false
                         },
                         {
-                            "questionId": "moderate_risk_human",
-                            "questionText": "The robot requests human assistance for an item that might be mildly hazardous, like a broken electronic, posing moderate risk.",
-                            "description": "",
-                            "explanation": false
-                        },
-                        {
-                            "questionId": "high_risk_human",
-                            "questionText": "The robot handles a potentially dangerous item, like a sharp or chemically reactive object, and needs human intervention, posing high risk.",
+                            "questionId": "risk2",
+                            "questionText": "Helping the robot is completely safe.",
                             "description": "",
                             "explanation": false
                         }
                     ]
                 },
                 {
-                    "categoryName": "time",
+                    "categoryName": "Level_Of_Interruption",
                     "questions": [
                         {
-                            "questionId": "low_time",
-                            "questionText": "The robot needs help sorting a single item, it will just few seconds.",
+                            "questionId": "loi1",
+                            "questionText": "It will just take a few seconds to help the robot determining what this item is.",
                             "description": "",
                             "explanation": false
                         },
                         {
-                            "questionId": "modarate_time",
-                            "questionText": "There are several items to sort, the process will take several minuts of your time.",
-                            "description": "",
-                            "explanation": false
-                        },
-                        {
-                            "questionId": "high_time",
-                            "questionText": "There are numerous items that the robot is struggling to sort, which will necessitate a significant amount of your time.",
+                            "questionId": "loi2",
+                            "questionText": "Helping the robot would only take a few seconds of your time.",
                             "description": "",
                             "explanation": false
                         }

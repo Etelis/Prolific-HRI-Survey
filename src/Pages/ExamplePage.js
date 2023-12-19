@@ -49,17 +49,14 @@ We really need your honest opinion.`
     if (!isFormValid()) return; // Ensure the form is valid before proceeding
   
     const endTime = new Date();
-    const timeTaken = (endTime - startTime) / 1000; // Time taken in seconds
+    const timeTaken = (endTime - startTime); // Time taken in seconds
   
     const examplePageData = {
       rating: {
         question: "How persuasive do you find the presented argument?",
         response: selectedRating
       },
-      timeTaken: {
-        description: "Time taken to complete the Example Page (in seconds)",
-        value: timeTaken
-      }
+      timeTaken: timeTaken,
       // Include any other relevant data here
     };
   

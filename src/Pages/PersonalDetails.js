@@ -26,7 +26,7 @@ const PersonalDetails = ({ onComplete }) => {
           setGenderError(!gender ? "Please select your gender." : "");
         } else {
           const endTime = new Date();
-          const timeTaken = (endTime - startTime) / 1000; // Time taken in seconds
+          const timeTaken = (endTime - startTime)
       
           const personalDetailsData = {
             age: {
@@ -41,10 +41,7 @@ const PersonalDetails = ({ onComplete }) => {
               question: "What is your gender?",
               response: gender
             },
-            timeTaken: {
-              question: "Time taken to complete the Personal Details section (in seconds)",
-              response: timeTaken
-            }
+            timeTaken: timeTaken,
           };
       
           onComplete(personalDetailsData);
