@@ -280,7 +280,7 @@
                     "questions": [
                         {
                             "questionId": "sanity_check",
-                            "questionText": "This is not a statement - we just want you to choose 3 for sanity check",
+                            "questionText": "This is not a statement - we just want you to choose 6 for sanity check",
                             "description": "",
                             "explanation": false
                         }
