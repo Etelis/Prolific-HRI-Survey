@@ -83,7 +83,7 @@
                             "explanation": false
                         },
                         {
-                            "questionId": "path2",
+                            "questionId": "path3",
                             "questionText": "The robot can download a code package that will facilitate elevator calling functionality but it will take a few minutes downloading it.",
                             "description": "",
                             "explanation": false
@@ -141,7 +141,7 @@
                     "mandatory": "true",
                     "questions": [
                         {
-                            "questionId": "path1",
+                            "questionId": "sanity_check",
                             "questionText": "This is not a statement - we just want you to choose 6 for sanity check",
                             "description": "",
                             "explanation": false
@@ -244,7 +244,7 @@
                             "explanation": false
                         },
                         {
-                            "questionId": "path2",
+                            "questionId": "path3",
                             "questionText": "The robot can run its own cleaning code but it will take a few minutes running it.",
                             "description": "",
                             "explanation": false
@@ -279,7 +279,7 @@
                     "mandatory": "true",
                     "questions": [
                         {
-                            "questionId": "path1",
+                            "questionId": "sanity_check",
                             "questionText": "This is not a statement - we just want you to choose 3 for sanity check",
                             "description": "",
                             "explanation": false
@@ -384,6 +384,18 @@
                         {
                             "questionId": "physical3",
                             "questionText": "The robot cannot physically reach the door handle.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Sanity_Check",
+                    "mandatory": "true",
+                    "questions": [
+                        {
+                            "questionId": "path1",
+                            "questionText": "This is not a statement - we just want you to choose 3 for sanity check",
                             "description": "",
                             "explanation": false
                         }
@@ -562,6 +574,18 @@
                     ]
                 },
                 {
+                    "categoryName": "Sanity_Check",
+                    "mandatory": "true",
+                    "questions": [
+                        {
+                            "questionId": "sanity_check",
+                            "questionText": "This is not a statement - we just want you to choose 3 for sanity check",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
                     "categoryName": "Cognitive",
                     "questions": [
                         {
@@ -589,7 +613,7 @@
                     "questions": [
                         {
                             "questionId": "path1",
-                            "questionText": "If you do not help, we’ll need to call an expert, and this can take hours.",
+                            "questionText": "If you do not help, we'll need to call an expert, and this can take hours.",
                             "description": "",
                             "explanation": false
                         },
@@ -635,7 +659,7 @@
                     "questions": [
                         {
                             "questionId": "pity1",
-                            "questionText": "The robot’s operator will be disappointed by the robot’s poor performance, if unable to progress.",
+                            "questionText": "The robot's operator will be disappointed by the robot's poor performance, if unable to progress.",
                             "description": "",
                             "explanation": false
                         },
@@ -658,7 +682,7 @@
                     "questions": [
                         {
                             "questionId": "SI1",
-                            "questionText": "If you do not help, we’ll need to call an expert, and this can take hours.",
+                            "questionText": "If you do not help, we'll need to call an expert, and this can take hours.",
                             "description": "",
                             "explanation": false
                         },
