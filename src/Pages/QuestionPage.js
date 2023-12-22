@@ -182,6 +182,7 @@ const QuestionPage = ({ jsonFileName, onComplete }) => {
                         title="Attention"
                         description="Your response is important. We need your honest opinion."
                         buttonText="Continue"
+                        buttonDelay="100"
                         onButtonClick={handleContinueClick}
                     />
                 )}
