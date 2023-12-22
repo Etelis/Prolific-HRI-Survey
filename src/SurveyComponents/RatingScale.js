@@ -108,7 +108,7 @@ const RatingScale = ({
             Not Persuasive at All
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-            {Array.from({ length: 5 }, (_, i) => i + 1).map((value) => (
+            {Array.from({ length: 7 }, (_, i) => i + 1).map((value) => (
               <StyledButton
                 key={value}
                 selected={localSelectedValue === value}
