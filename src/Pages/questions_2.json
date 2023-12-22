@@ -390,18 +390,6 @@
                     ]
                 },
                 {
-                    "categoryName": "Sanity_Check",
-                    "mandatory": "true",
-                    "questions": [
-                        {
-                            "questionId": "path1",
-                            "questionText": "This is not a statement - we just want you to choose 3 for sanity check",
-                            "description": "",
-                            "explanation": false
-                        }
-                    ]
-                },
-                {
                     "categoryName": "Cognitive",
                     "questions": [
                         {
@@ -568,18 +556,6 @@
                         {
                             "questionId": "physical3",
                             "questionText": "The design of the robot's wheels suggests that they may not be able to traverse over obstacles such as the fishing net.",
-                            "description": "",
-                            "explanation": false
-                        }
-                    ]
-                },
-                {
-                    "categoryName": "Sanity_Check",
-                    "mandatory": "true",
-                    "questions": [
-                        {
-                            "questionId": "sanity_check",
-                            "questionText": "This is not a statement - we just want you to choose 3 for sanity check",
                             "description": "",
                             "explanation": false
                         }
