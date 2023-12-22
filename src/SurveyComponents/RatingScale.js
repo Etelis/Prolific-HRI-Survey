@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 
-
 const ErrorBox = styled(Box)(({ theme }) => ({
   backgroundColor: '#ffcccb',
   padding: '5px 10px',
@@ -79,6 +78,14 @@ const RatingScale = ({
     }
   };
 
+  const smallTextTypographyStyle = {
+    fontWeight: 'normal',
+    fontSize: '12px',
+    fontFamily: 'Open Sans, sans-serif',
+    alignSelf: 'center',
+    margin: '0 20px' // Added margin to move text further to the sides
+  };
+  
   return (
     <>
       {error && (
@@ -86,35 +93,35 @@ const RatingScale = ({
           <Typography variant="body2">{error}</Typography>
         </ErrorBox>
       )}
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', p: 2, boxShadow: 3, borderRadius: 2, backgroundColor: 'background.paper', width: '50vw', maxWidth: '700px', padding: '32px 40px', fontFamily: 'Open Sans, sans-serif', margin: 'auto', marginTop: '20px', marginBottom: '20px', whiteSpace: 'pre-wrap'}}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 2, boxShadow: 3, borderRadius: 2, backgroundColor: 'background.paper', width: '50vw', maxWidth: '700px', padding: '32px 40px', fontFamily: 'Open Sans, sans-serif', margin: 'auto', marginTop: '20px', marginBottom: '20px', whiteSpace: 'pre-wrap'}}>
         <Typography variant="" sx={customTypographyStyle}>
-          {questionNumber != null && totalQuestions != null ? 
-            `Argument (${questionNumber}/${totalQuestions}): ${questionText}` : 
-            questionText}
+          {
+            `Argument: ${questionText}`}
         </Typography>
         {description && (
           <Typography variant="" sx={{ color: '#00000073', mb: 2, fontSize: '14px', fontFamily: 'Open Sans, sans-serif'}}>
             {description}
           </Typography>
         )}
-        {description && (
-          <Typography variant="" sx={{ color: '#00000073', mb: 2, fontSize: '14px', fontFamily: 'Open Sans, sans-serif'}}>
-            {description}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2, p: 1, border: '1px solid #f0f0f0', borderRadius: '4px' }}>
+          <Typography variant="" sx={smallTextTypographyStyle}>
+            Not Persuasive at All
           </Typography>
-        )}
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2, p: 1, border: '1px solid #f0f0f0', borderRadius: '4px' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-          {Array.from({ length: 7 }, (_, i) => i + 1).map((value) => (
-            <StyledButton
-              key={value}
-              selected={localSelectedValue === value}
-              onClick={() => handleButtonClick(value)}
-              disabled={readOnly}
-            >
-              {value}
-            </StyledButton>
-          ))}
-        </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+            {Array.from({ length: 5 }, (_, i) => i + 1).map((value) => (
+              <StyledButton
+                key={value}
+                selected={localSelectedValue === value}
+                onClick={() => handleButtonClick(value)}
+                disabled={readOnly}
+              >
+                {value}
+              </StyledButton>
+            ))}
+          </Box>
+          <Typography variant="" sx={smallTextTypographyStyle}>
+            Extremely Persuasive
+          </Typography>
         </Box>
         <Box sx={{ height: '40px', mt: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
           {explanation && localSelectedValue && (

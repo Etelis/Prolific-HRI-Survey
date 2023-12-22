@@ -179,8 +179,8 @@ const QuestionPage = ({ jsonFileName, onComplete }) => {
             <div>
             {showMessage && (
                     <Text 
-                        title="Attention"
-                        description="Your response is important. We need your honest opinion."
+                        title="We Have Passed the 50% Mark"
+                        description="This is just a kind reminder that you honest opinion really matters here"
                         buttonText="Continue"
                         buttonDelay="100"
                         onButtonClick={handleContinueClick}

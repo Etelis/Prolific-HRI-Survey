@@ -103,7 +103,7 @@ We really need your honest opinion.`
       {showRatingScale && (
         <>
 <RatingScale
-    questionText="The book is too high for the robot to reach."
+    questionText="The book is too high for the robot to reach"
     description={scale_desc}
     explanation={true}
     onValueChange={handleRatingChange}

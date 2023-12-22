@@ -524,7 +524,7 @@
         },
         {
             "imageUrl": "https://i.ibb.co/372Lq1b/283fc023-a65e-41a1-b1ba-5c21f0c5b96f.jpg",
-            "description": "In this image, a robot has a fishing rode limiting it's ability",
+            "description": "In this image, the robot's wheels got tangled in a fishing net and it can't move forward",
             "questionCategories": [
                 {
                     "categoryName": "Physical",
@@ -582,7 +582,7 @@
                     "questions": [
                         {
                             "questionId": "low_urgency",
-                            "questionText": "The robot needs to deliver an eCommerce package to a customer.",
+                            "questionText": "The robot needs to collect an Emergency Medical Kit for a guest who collapsed in the lobby and the door is blocking it.",
                             "description": "",
                             "explanation": false
                         },
