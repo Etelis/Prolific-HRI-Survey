@@ -49,6 +49,7 @@ function App() {
     const completedSurveyData = { 
       ...surveyData, 
       finishPage: finishData,
+      version: "2",
       ...urlParams
     };
 
