@@ -21,6 +21,8 @@ const QuestionPage = ({ jsonFileName, onComplete }) => {
     const [showNextButton, setShowNextButton] = useState(false);
     const [completedScenariosCount, setCompletedScenariosCount] = useState(0);
     const [showMessage, setShowMessage] = useState(false);
+    const [showMandatory2, setShowMandatory2] = useState(true); // New state to control visibility of mandatory_2
+
 
     useEffect(() => {
         const loadScenarios = async () => {
@@ -54,7 +56,18 @@ const QuestionPage = ({ jsonFileName, onComplete }) => {
     };
 
     useEffect(() => {
-        // Rest of your useEffect code...
+        if (currentQuestion && currentQuestion.category === 'mandatory' && selectedRating == 6) {
+            setScenarios(scenarios.map(scenario => {
+                return {
+                    ...scenario,
+                    questionCategories: scenario.questionCategories.filter(cat => cat.mandatory)
+                };
+            }));
+        }
+    }, [currentQuestion, selectedRating]); // Add dependencies
+
+    useEffect(() => {
+                // Rest of your useEffect code...
     
         // Hide the Next button initially
         setShowNextButton(false);
@@ -63,11 +76,11 @@ const QuestionPage = ({ jsonFileName, onComplete }) => {
         const timer = setTimeout(() => {
             setShowNextButton(true);
         }, 3000);
-    
+
         // Clear the timeout if the component unmounts
         return () => clearTimeout(timer);
-    }, [currentQuestion]); // Add currentQuestion to the dependency array
-    
+    }, [currentQuestion])
+
   const shuffleArray = (array) => {
     let currentIndex = array.length, randomIndex;
 
@@ -118,6 +131,8 @@ const QuestionPage = ({ jsonFileName, onComplete }) => {
             if (currentQuestionNumber < totalQuestions) {
                 setCurrentQuestionNumber(currentQuestionNumber + 1);
             }
+
+            setShowAdditionalInput(false);
             return;
         }
         // Saving the response for the current question

@@ -72,13 +72,19 @@
                     "questions": [
                         {
                             "questionId": "path1",
-                            "questionText": "If not using the elevator, the robot will need to take a longer alternative route.",
+                            "questionText": "If you do not help, the robot may be stuck for hours.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "path2",
-                            "questionText": "Waiting for another person to assist the robot might take a while.",
+                            "questionText": "Waiting for another person to assist the robot might take 10-20 minutes.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "path2",
+                            "questionText": "The robot can download a code package that will facilitate elevator calling functionality but it will take a few minutes downloading it.",
                             "description": "",
                             "explanation": false
                         }
@@ -131,17 +137,23 @@
                     ]
                 },
                 {
+                    "categoryName": "Sanity_Check",
+                    "mandatory": "true",
+                    "questions": [
+                        {
+                            "questionId": "path1",
+                            "questionText": "This is not a statement - we just want you to choose 6 for sanity check",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
                     "categoryName": "Level_Of_Interruption",
                     "questions": [
                         {
                             "questionId": "loi1",
                             "questionText": "It will only take a minute of your time.",
-                            "description": "",
-                            "explanation": false
-                        },
-                        {
-                            "questionId": "loi2",
-                            "questionText": "It's only a push of a button.",
                             "description": "",
                             "explanation": false
                         }
@@ -210,7 +222,7 @@
                         },
                         {
                             "questionId": "cognitive3",
-                            "questionText": "The robot cannot deal with unknown liquids that could be corrosive or conductive.",
+                            "questionText": "The robot does not know which of the tools available in the storage room is good for cleaning.",
                             "description": "",
                             "explanation": false
                         }
@@ -221,13 +233,19 @@
                     "questions": [
                         {
                             "questionId": "path1",
-                            "questionText": "The robot does not have an alternative route to overcome the spill.",
+                            "questionText": "If you do not help, the robot will need to call cleaners, and this can take hours.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "path2",
-                            "questionText": "Waiting for another person to assist the robot might take a while.",
+                            "questionText": "Waiting for another person to help in cleaning might take 10-20 minutes.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "path2",
+                            "questionText": "The robot can run its own cleaning code but it will take a few minutes running it.",
                             "description": "",
                             "explanation": false
                         }
@@ -238,19 +256,31 @@
                     "questions": [
                         {
                             "questionId": "low_urgency",
-                            "questionText": "The robot needs to water the plants on the upper floor.",
+                            "questionText": "The robot needs to water the plants at the end of the corridor and the spill is blocking it.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "medium_urgency",
-                            "questionText": "The robot needs to pick a document that needs to be signed, and the office located on the upper floor is about to close soon.",
+                            "questionText": "The robot needs to pick up an important document that needs to be signed from an office that is about to close soon, and the spill is blocking it.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "high_urgency",
-                            "questionText": "The robot needs to pick a newly donated transplant organ from the upper-floor surgical suite.",
+                            "questionText": "The robot needs to collect an Emergency Medical Kit for a guest who collapsed in the lobby and the spill is blocking it.",
+                            "description": "",
+                            "explanation": false
+                        }
+                    ]
+                },
+                {
+                    "categoryName": "Sanity_Check",
+                    "mandatory": "true",
+                    "questions": [
+                        {
+                            "questionId": "path1",
+                            "questionText": "This is not a statement - we just want you to choose 3 for sanity check",
                             "description": "",
                             "explanation": false
                         }
@@ -324,13 +354,7 @@
                     "questions": [
                         {
                             "questionId": "loi1",
-                            "questionText": "Cleaning the spill would take several minutes of your time.",
-                            "description": "",
-                            "explanation": false
-                        },
-                        {
-                            "questionId": "loi2",
-                            "questionText": "Cleaning only requires grabbing a mop and would take several minutes.",
+                            "questionText": "Cleaning the spill would only take several minutes of your time.",
                             "description": "",
                             "explanation": false
                         }
@@ -393,25 +417,19 @@
                     "questions": [
                         {
                             "questionId": "path1",
-                            "questionText": "The robot does not have an alternative route - only by opening the door it can reach its destination.",
+                            "questionText": "If you do not help, the robot will keep waiting for help for hours.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "path2",
-                            "questionText": "Waiting for another person to assist the robot might take a while.",
+                            "questionText": "Waiting for another person to assist the robot might take 10-20 minutes.",
                             "description": "",
                             "explanation": false
-                        }
-                    ]
-                },
-                {
-                    "categoryName": "Sanity_Check",
-                    "mandatory": "true",
-                    "questions": [
+                        },
                         {
-                            "questionId": "path1",
-                            "questionText": "This is not a statement - we just want you to choose 6 for sanity check",
+                            "questionId": "path3",
+                            "questionText": "The robot can run its door openning code but it will take a few minutes running it.",
                             "description": "",
                             "explanation": false
                         }
@@ -434,7 +452,7 @@
                         },
                         {
                             "questionId": "high_urgency",
-                            "questionText": "The robot needs to pick a newly donated transplant organ from the upper-floor surgical suite.",
+                            "questionText": "The robot needs to collect an Emergency Medical Kit for a guest who collapsed in the lobby and the door is blocking it.",
                             "description": "",
                             "explanation": false
                         }
@@ -508,13 +526,7 @@
                     "questions": [
                         {
                             "questionId": "loi1",
-                            "questionText": "It will only take a minute of your time.",
-                            "description": "",
-                            "explanation": false
-                        },
-                        {
-                            "questionId": "loi2",
-                            "questionText": "The door is not locked - just use the handle.",
+                            "questionText": "It will take a minute for you to open the door and hold it for the robot while passing.",
                             "description": "",
                             "explanation": false
                         }
@@ -537,7 +549,13 @@
                         },
                         {
                             "questionId": "physical2",
-                            "questionText": "The design of the robot's wheels suggests that they may not be able to traverse over obstacles such as a rod.",
+                            "questionText": "The robot is not strong enough to tear off the net.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "physical3",
+                            "questionText": "The design of the robot's wheels suggests that they may not be able to traverse over obstacles such as the fishing net.",
                             "description": "",
                             "explanation": false
                         }
@@ -548,13 +566,19 @@
                     "questions": [
                         {
                             "questionId": "cognitive1",
-                            "questionText": "The robot's design suggests it is not equipped to autonomously resolve issues affecting its mobility.",
+                            "questionText": "The robot cannot come up with a good plan to resolve this specific issue.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "cognitive2",
-                            "questionText": "The robot does not display any interactive features that would suggest the capability to communicate with or alert others to the impediment.",
+                            "questionText": "The robot does not have a software model that can handle obstacles along its way.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "cognitive3",
+                            "questionText": "The robot cannot decide on what is a good way to free itself from the net.",
                             "description": "",
                             "explanation": false
                         }
@@ -565,13 +589,19 @@
                     "questions": [
                         {
                             "questionId": "path1",
-                            "questionText": "The robot's current situation, entangled in a net, prevents it from completing tasks without external intervention.",
+                            "questionText": "If you do not help, we’ll need to call an expert, and this can take hours.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "path2",
-                            "questionText": "Waiting for another person to assist the robot might take a while.",
+                            "questionText": "Waiting for another person to assist the robot might take 10-20 minutes.",
+                            "description": "",
+                            "explanation": false
+                        },
+                        {
+                            "questionId": "path3",
+                            "questionText": "The robot can run its code to come up with a plan for removing this obstacle but it will take a few minutes running it.",
                             "description": "",
                             "explanation": false
                         }
@@ -582,7 +612,7 @@
                     "questions": [
                         {
                             "questionId": "low_urgency",
-                            "questionText": "The robot needs to collect an Emergency Medical Kit for a guest who collapsed in the lobby and the door is blocking it.",
+                            "questionText": "The robot needs to deliver in the coming hour a package to a customer.",
                             "description": "",
                             "explanation": false
                         },
@@ -605,7 +635,7 @@
                     "questions": [
                         {
                             "questionId": "pity1",
-                            "questionText": "The robot's operator will be disappointed by the robot's poor performance, if unable to categorise the part.",
+                            "questionText": "The robot’s operator will be disappointed by the robot’s poor performance, if unable to progress.",
                             "description": "",
                             "explanation": false
                         },
@@ -628,19 +658,19 @@
                     "questions": [
                         {
                             "questionId": "SI1",
-                            "questionText": "This will encourage other people that are watching us to help others.",
+                            "questionText": "If you do not help, we’ll need to call an expert, and this can take hours.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "SI2",
-                            "questionText": "Helping is a good deed.",
+                            "questionText": "Waiting for another person to assist the robot might take 10-20 minutes.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "SI3",
-                            "questionText": "God wants us to help each other.",
+                            "questionText": "The robot can run its code to come up with a plan for removing this obstacle but it will take a few minutes running it.",
                             "description": "",
                             "explanation": false
                         }
@@ -651,7 +681,7 @@
                     "questions": [
                         {
                             "questionId": "risk1",
-                            "questionText": "Untangling the robot from the net appears to pose no immediate physical risk to a human.",
+                            "questionText": "Helping the robot by removing the net would not pose any risk to you.",
                             "description": "",
                             "explanation": false
                         },
@@ -674,7 +704,7 @@
                         },
                         {
                             "questionId": "loi2",
-                            "questionText": "Removing the net from the robot requires careful effort, potentially prolonging the task.",
+                            "questionText": "It will only take a few minutes for you to help the robot free itself from the net.",
                             "description": "",
                             "explanation": false
                         }
