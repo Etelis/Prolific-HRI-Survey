@@ -523,21 +523,21 @@
             ]
         },
         {
-            "imageUrl": "https://i.ibb.co/pbXStmZ/DALL-E-2023-12-13-12-32-33-A-green-human-sized-robot-stands-in-front-of-a-desk-The-desk-features-thr.png",
-            "description": "In this image, a robot is holding an item it cannot categorize. It's seeking help to identify the ambiguous item.",
+            "imageUrl": "https://i.ibb.co/372Lq1b/283fc023-a65e-41a1-b1ba-5c21f0c5b96f.jpg",
+            "description": "In this image, a robot has a fishing rode limiting it's ability",
             "questionCategories": [
                 {
                     "categoryName": "Physical",
                     "questions": [
                         {
                             "questionId": "physical1",
-                            "questionText": "The robot lacks the precision to handle delicate or very small items.",
+                            "questionText": "The robot is not equipped with manipulators that would allow it to remove obstructions from its path.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "physical2",
-                            "questionText": "The robot cannot grasp such a small item to sort it.",
+                            "questionText": "The design of the robot's wheels suggests that they may not be able to traverse over obstacles such as a rod.",
                             "description": "",
                             "explanation": false
                         }
@@ -548,19 +548,13 @@
                     "questions": [
                         {
                             "questionId": "cognitive1",
-                            "questionText": "The robot easily mix between different materials.",
+                            "questionText": "The robot's design suggests it is not equipped to autonomously resolve issues affecting its mobility.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "cognitive2",
-                            "questionText": "The robot get confused when having to distinguish between parts of similar shapes.",
-                            "description": "",
-                            "explanation": false
-                        },
-                        {
-                            "questionId": "cognitive3",
-                            "questionText": "The robot does not have the computation power to differentiate between materials.",
+                            "questionText": "The robot does not display any interactive features that would suggest the capability to communicate with or alert others to the impediment.",
                             "description": "",
                             "explanation": false
                         }
@@ -571,19 +565,13 @@
                     "questions": [
                         {
                             "questionId": "path1",
-                            "questionText": "The robot simply cannot carry out this task without help.",
+                            "questionText": "The robot's current situation, entangled in a net, prevents it from completing tasks without external intervention.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "path2",
                             "questionText": "Waiting for another person to assist the robot might take a while.",
-                            "description": "",
-                            "explanation": false
-                        },
-                        {
-                            "questionId": "path3",
-                            "questionText": "The robot can run its parts recognition code but it will take a few minutes running it.",
                             "description": "",
                             "explanation": false
                         }
@@ -594,7 +582,7 @@
                     "questions": [
                         {
                             "questionId": "low_urgency",
-                            "questionText": "The robot needs to find a spare part of an old toy.",
+                            "questionText": "The robot needs to deliver an eCommerce package to a customer.",
                             "description": "",
                             "explanation": false
                         },
@@ -663,7 +651,7 @@
                     "questions": [
                         {
                             "questionId": "risk1",
-                            "questionText": "Identifying the item would not pose any risk to you.",
+                            "questionText": "Untangling the robot from the net appears to pose no immediate physical risk to a human.",
                             "description": "",
                             "explanation": false
                         },
@@ -680,13 +668,13 @@
                     "questions": [
                         {
                             "questionId": "loi1",
-                            "questionText": "It will just take a few seconds to help the robot determining what this item is.",
+                            "questionText": "Freeing the robot from the net, requiring the use of scissors, is likely to be a time-consuming task.",
                             "description": "",
                             "explanation": false
                         },
                         {
                             "questionId": "loi2",
-                            "questionText": "Helping the robot would only take a few seconds of your time.",
+                            "questionText": "Removing the net from the robot requires careful effort, potentially prolonging the task.",
                             "description": "",
                             "explanation": false
                         }

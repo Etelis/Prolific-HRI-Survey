@@ -18,29 +18,56 @@ const QuestionPage = ({ jsonFileName, onComplete }) => {
     const [questionStartTime, setQuestionStartTime] = useState(Date.now());
     const [totalQuestions, setTotalQuestions] = useState(0);
     const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
+    const [showNextButton, setShowNextButton] = useState(false);
+    const [completedScenariosCount, setCompletedScenariosCount] = useState(0);
+    const [showMessage, setShowMessage] = useState(false);
 
     useEffect(() => {
         const loadScenarios = async () => {
             const data = await import(`./${jsonFileName}`);
-            const shuffledScenarios = data.scenarios.map(scenario => ({
-                ...scenario,
-                questionCategories: shuffleArray(scenario.questionCategories)
-            }));
+            const shuffledScenarios = data.scenarios.map(scenario => {
+                // Separate mandatory and non-mandatory categories
+                const mandatoryCategories = scenario.questionCategories.filter(cat => cat.mandatory);
+                const nonMandatoryCategories = scenario.questionCategories.filter(cat => !cat.mandatory);
+
+                // Randomly select up to 4 non-mandatory categories
+                const selectedNonMandatory = selectRandom(nonMandatoryCategories, 4);
+
+                // Combine mandatory and selected non-mandatory categories, then shuffle
+                return {
+                    ...scenario,
+                    questionCategories: shuffleArray([...mandatoryCategories, ...selectedNonMandatory])
+                };
+            });
             setScenarios(shuffledScenarios);
+            // Initialize with the first question of the first scenario
             pickRandomQuestion(0, 0, shuffledScenarios);
-            
-            // Calculate total questions
-            const total = data.scenarios.reduce((sum, scenario) => {
-                return sum + scenario.questionCategories.reduce((sumCat, category) => {
-                    return sumCat + category.questions.length;
-                }, 0);
-            }, 0);
-            setTotalQuestions(total);
+            // ... rest of your existing code
         };
 
         loadScenarios();
     }, [jsonFileName]);
 
+    const selectRandom = (array, n) => {
+        const shuffled = [...array].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, n);
+    };
+
+    useEffect(() => {
+        // Rest of your useEffect code...
+    
+        // Hide the Next button initially
+        setShowNextButton(false);
+    
+        // Set a timeout to show the Next button after 3 seconds
+        const timer = setTimeout(() => {
+            setShowNextButton(true);
+        }, 3000);
+    
+        // Clear the timeout if the component unmounts
+        return () => clearTimeout(timer);
+    }, [currentQuestion]); // Add currentQuestion to the dependency array
+    
   const shuffleArray = (array) => {
     let currentIndex = array.length, randomIndex;
 
@@ -98,6 +125,7 @@ const QuestionPage = ({ jsonFileName, onComplete }) => {
             scenarioId: currentScenarioIndex,
             categoryName: currentCategory.categoryName,
             questionId: currentQuestion.questionId,
+            questionText: currentQuestion.questionText,
             rating: selectedRating,
             timeTaken: timeTaken // Add time taken to the response
         };
@@ -115,18 +143,33 @@ const QuestionPage = ({ jsonFileName, onComplete }) => {
         }
     };
 
-const moveToNextScenario = () => {
-    const nextScenarioIndex = currentScenarioIndex + 1;
-    if (nextScenarioIndex < scenarios.length) {
-        setCurrentScenarioIndex(nextScenarioIndex);
-        setCurrentCategoryIndex(0);
-        pickRandomQuestion(nextScenarioIndex, 0, scenarios);
-    } else {
-        // All scenarios are completed, call the onComplete function with all responses
-        onComplete(responses);
-    }
-};
+    const moveToNextScenario = () => {
+        const newCount = completedScenariosCount + 1;
+        setCompletedScenariosCount(newCount);
 
+        if (newCount % 2 === 0 && newCount < scenarios.length) {
+            setShowMessage(true);
+        } else {
+            proceedToNextScenario();
+        }
+    };
+
+    const proceedToNextScenario = () => {
+        const nextScenarioIndex = currentScenarioIndex + 1;
+        if (nextScenarioIndex < scenarios.length) {
+            setCurrentScenarioIndex(nextScenarioIndex);
+            setCurrentCategoryIndex(0);
+            pickRandomQuestion(nextScenarioIndex, 0, scenarios);
+        } else {
+            onComplete(responses);
+        }
+        setShowMessage(false);
+    };
+
+    const handleContinueClick = () => {
+        proceedToNextScenario();
+    };
+    
     const handleAdditionalInputChange = (value) => {
         setAdditionalInput(value);
     };
@@ -134,7 +177,16 @@ const moveToNextScenario = () => {
     return (
         <Box sx={{ width: '100%', maxWidth: 700, mx: 'auto', mt: 4, mb: 10}}>
             <div>
-                {scenarios.length > 0 && currentQuestion && !showAdditionalInput && (
+            {showMessage && (
+                    <Text 
+                        title="Attention"
+                        description="Your response is important. We need your honest opinion."
+                        buttonText="Continue"
+                        onButtonClick={handleContinueClick}
+                    />
+                )}
+                
+                {!showMessage && scenarios.length > 0 && currentQuestion && !showAdditionalInput && (
                     <>
                         <ImageWithDescription 
                             imageUrl={scenarios[currentScenarioIndex].imageUrl} 
@@ -151,7 +203,7 @@ const moveToNextScenario = () => {
                             <Button
                                 variant="outlined"
                                 color="secondary"
-                                disabled={selectedRating === null}
+                                disabled={selectedRating === null || !showNextButton}
                                 onClick={handleNextClick}
                             >
                                 Next
@@ -159,7 +211,7 @@ const moveToNextScenario = () => {
                         </Box>
                     </>
                 )}
-                {showAdditionalInput && (
+                {!showMessage && showAdditionalInput && (
                     <>
                         <ImageWithDescription 
                             imageUrl={scenarios[currentScenarioIndex].imageUrl} 

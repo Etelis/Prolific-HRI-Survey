@@ -78,7 +78,7 @@ function App() {
       case 3:
         return <StartPage onAgree={handleStart} />;
       case 4:
-        return <QuestionPage jsonFileName="questions.json" onComplete={handleQuestionPageComplete} />;
+        return <QuestionPage jsonFileName="questions_2.json" onComplete={handleQuestionPageComplete} />;
       case 5:
         return <FinishPage onComplete={handleFinishPageComplete} />;
       default:
