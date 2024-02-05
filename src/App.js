@@ -1,108 +1,123 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import SurveyIntro from './Pages/SurveyIntro';
-import PersonalDetails from './Pages/PersonalDetails';
-import ExamplePage from './Pages/ExamplePage';
-import QuestionPage from './Pages/QuestionPage';
-import FinishPage from './Pages/FinishPage'; // Import FinishPage
-import StartPage from './Pages/StartPage';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import GameIntroPage from './Pages/GameIntroPage';
+import FeedbackPage from './Pages/FeedbackPage';
+import WhoopsPage from './Pages/WhoopsPage';
+import Completed from './Pages/Completed';
 
 function App() {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [surveyData, setSurveyData] = useState({});
-  const [urlParams, setUrlParams] = useState({});
-  const navigate = useNavigate();
+  const [currentStep, setCurrentStep] = useState(null);
+  const [userId, setUserId] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setUrlParams({
-      PROLIFIC_PID: params.get('PROLIFIC_PID'),
-      STUDY_ID: params.get('STUDY_ID'),
-      SESSION_ID: params.get('SESSION_ID')
-    });
+    const queryParams = new URLSearchParams(window.location.search);
+    const PROLIFIC_PID = queryParams.get('PROLIFIC_PID');
+    const STUDY_ID = queryParams.get('STUDY_ID');
+    const SESSION_ID = queryParams.get('SESSION_ID');
+
+    // Check if any of the Prolific information is null or empty
+    if (!PROLIFIC_PID || !STUDY_ID || !SESSION_ID) {
+      console.error('Missing Prolific information');
+      setCurrentStep('Whoops');
+      setIsLoading(false); // Immediately set loading to false since we're not loading any data
+    } else {
+      checkUserStatus(PROLIFIC_PID, STUDY_ID, SESSION_ID);
+    }
   }, []);
-  const handleIntroComplete = () => {
-    setCurrentStep(1); // Move to PersonalDetails
-  };
 
-  const handlePersonalDetailsComplete = (details) => {
-    setSurveyData({ ...surveyData, personalDetails: details });
-    setCurrentStep(2); // Move to ExamplePage
-  };
+  const checkUserStatus = async (PROLIFIC_PID, STUDY_ID, SESSION_ID) => {
+    try {
+      const response = await fetch('https://europe-central2-co-op-world-game.cloudfunctions.net/prolific_welcome_page_started', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ PROLIFIC_PID, STUDY_ID, SESSION_ID })
+      });
+      const data = await response.json();
+      setUserId(data.userId);
+      
+      if (data.redirect) {
+        handleRedirect(data.redirect, data.userId);
 
-  const handleExamplePageComplete = (exampleData) => {
-    setSurveyData({ ...surveyData, examplePage: exampleData });
-    setCurrentStep(3); // Move to QuestionPage
-  };
-
-  const handleQuestionPageComplete = (questionData) => {
-    setSurveyData({ ...surveyData, questionPage: questionData });
-    setCurrentStep(5); // Move to FinishPage
-  };
-
-  const handleStart = () => {
-    setCurrentStep(4); // Move to SurveyIntro
-  };
-
-  const handleFinishPageComplete = (finishData) => {
-    const completedSurveyData = { 
-      ...surveyData, 
-      finishPage: finishData,
-      version: "2",
-      ...urlParams
-    };
-
-    // Send data to the server
-    fetch("https://24d6houomeioliarmgrwonbi7m0nmblf.lambda-url.eu-central-1.on.aws/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(completedSurveyData)
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.completionLink) {
-        window.location.href = data.completionLink;
+      } else {
+        setCurrentStep('GameIntro');
       }
-    })
-    .catch(error => console.error('Error:', error));
+    } catch (error) {
+      console.error('Error fetching user status:', error);
+      setCurrentStep('Whoops');
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  const handleRedirect = (status, userId) => {
+    switch (status) {
+      case 'feedback':
+        setCurrentStep('Feedback');
+        break;
+      case 'completed':
+        setCurrentStep('Completed');
+        break;
+      case 'error':
+        setCurrentStep('Whoops');
+        break;
+      default:
+        if (isValidHttpUrl(status)) {
+          window.location.href = status;
+        } else {
+          setCurrentStep('Whoops');
+        }
+        break;
+    }
+  };
+
+  function isValidHttpUrl(string) {
+    let url;
+
+    try {
+      url = new URL(string);
+    } catch (_) {
+      return false;  
+    }
+
+    return url.protocol === "http:" || url.protocol === "https:";
+  }
 
   const renderStep = () => {
     switch (currentStep) {
-      case 0:
-        return <SurveyIntro onAgree={handleIntroComplete} />;
-      case 1:
-        return <PersonalDetails onComplete={handlePersonalDetailsComplete} />;
-      case 2:
-        return <ExamplePage onComplete={handleExamplePageComplete} />;
-      case 3:
-        return <StartPage onAgree={handleStart} />;
-      case 4:
-        return <QuestionPage jsonFileName="questions_2.json" onComplete={handleQuestionPageComplete} />;
-      case 5:
-        return <FinishPage onComplete={handleFinishPageComplete} />;
+      case 'GameIntro':
+        return <GameIntroPage onGameComplete={handleRedirect} userId={userId} />;
+      case 'Feedback':
+        return <FeedbackPage onSubmitFeedback={handleRedirect} userId={userId} />;
+      case 'Whoops':
+        return <WhoopsPage />;
+      case 'Completed':
+          return <Completed />;
       default:
-        return <div>Unknown step</div>;
+        return <div>Loading...</div>;
     }
   };
 
   return (
     <div className="App">
-      {/* Navigation Bar */}
       <nav className="navbar navbar-light bg-light">
         <div className="container-fluid">
-          <span className="navbar-brand mb-0 h1">HRI Survey</span>
+          <span className="navbar-brand mb-0 h1">Game Feedback</span>
         </div>
       </nav>
-
-      {/* Main Content */}
-      {renderStep()}
-
-      {/* Footer */}
+      {isLoading ? (
+        <div className="text-center mt-5">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <p>Loading...</p>
+        </div>
+      ) : (
+        renderStep()
+      )}
       <footer className="footer mt-auto py-3 bg-light">
         <div className="container text-center">
-          <span className="text-muted">Thank you for your contribution to research.</span>
+          <span className="text-muted">Thank you for your participation.</span>
         </div>
       </footer>
     </div>
