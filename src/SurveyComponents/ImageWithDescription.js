@@ -6,15 +6,22 @@ const ImageWithDescription = ({ imagePath, description }) => {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
-    // Dynamic import to load the image
-    import(`../images/${imagePath}`)
-      .then(image => {
-        setImageUrl(image.default);
-      })
-      .catch(error => {
-        console.error('Failed to load image:', error);
-        // Handle the failure, possibly set a fallback image
-      });
+    if (imagePath.startsWith('http')) {
+      // If imagePath is a URL, set it directly
+      setImageUrl(imagePath);
+    } else {
+      // Attempt to dynamically import the image from a local path
+      import(`../images/${imagePath}`)
+        .then((image) => {
+          // If successful, set the imported image
+          setImageUrl(image.default);
+        })
+        .catch((error) => {
+          console.error('Failed to load image:', error);
+          // Here, handle the error when local path import fails.
+          // Since imagePath is not a URL, you may want to set a fallback image or handle the error differently.
+        });
+    }
   }, [imagePath]);
 
   return (
@@ -28,17 +35,16 @@ const ImageWithDescription = ({ imagePath, description }) => {
         borderRadius: 2,
         backgroundColor: 'background.paper',
         fontFamily: 'Open Sans, sans-serif',
-        width: '100%', // Adjusted to take full width of the parent container
-        maxWidth: '700px', // To avoid being too wide on larger screens
+        width: '100%',
+        maxWidth: '700px',
         margin: 'auto',
         marginTop: '20px',
-        overflow: 'hidden', // To maintain the box shape
-        whiteSpace: 'pre-wrap',
+        overflow: 'hidden',
         padding: '32px 40px 40px',
       }}
     >
       {imageUrl && (
-        <img src={imageUrl} alt="Descriptive" style={{ maxWidth: '100%', maxWidth: '50%', height: 'auto' }} />
+        <img src={imageUrl} alt="Descriptive" style={{ maxWidth: '100%', maxHeight: '50%'}} />
       )}
       <Typography variant="body1" sx={{ mt: 2, textAlign: 'justify' }}>
         {description}

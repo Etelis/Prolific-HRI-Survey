@@ -1,0 +1,11 @@
+body {
+  margin: 0 !important;
+  height: 100%;
+}
+
+.renderer-core-block-split-left-layout .renderer-core-block-attachment img, 
+.renderer-core-block-split-right-layout .renderer-core-block-attachment img {
+  width: 650px !important; /* Removed quotes for proper CSS syntax */
+  height: 1000px !important; /* Removed quotes for proper CSS syntax */
+  object-fit: none; /* Adjust this based on desired behavior */
+}

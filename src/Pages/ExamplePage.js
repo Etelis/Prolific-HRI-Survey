@@ -67,7 +67,7 @@ const ExamplePage = ({ onComplete }) => {
         {currentStep === 1 && (
           <>
             <ImageWithDescription
-              imagePath="robot_images/Anthropomorphic/scitos_g5.png"
+              imagePath="https://www.researchgate.net/publication/304986987/figure/fig4/AS:381111487221770@1467875467880/Scitos-G5-with-its-Human-Machine-Interface-and-RoboHead-in-the-institute-computer.png"
               description="A Scitos-G5 Robot."
             />
             <TutorialBox text="Observe the robot image above. Note its design and features that might indicate its capabilities." />

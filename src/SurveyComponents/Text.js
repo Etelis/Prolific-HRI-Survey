@@ -1,94 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { styled } from '@mui/material/styles';
+import React, { useState } from 'react';
+import { Box, Typography, Button, Divider, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; // Icon for accordion expansion
 
-const ExpandMore = styled(IconButton)(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+const TextComponent = ({
+  title,
+  description,
+  fullDescription = '',
+  examples,
+  buttonText,
+  onButtonClick,
+}) => {
+  const [expanded, setExpanded] = useState(false);
 
-const Text = ({ title, description, fullDescription, buttonText, buttonDelay, onButtonClick }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
-
-  useEffect(() => {
-    if (buttonText && buttonDelay) {
-      const timer = setTimeout(() => {
-        setIsButtonEnabled(true);
-      }, buttonDelay);
-
-      return () => clearTimeout(timer);
-    }
-  }, [buttonText, buttonDelay]);
-
-  const handleExpandClick = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  const handleButtonClick = () => {
-    if (onButtonClick) {
-      onButtonClick();
-    }
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        p: 2,
-        boxShadow: 3,
-        borderRadius: 2,
-        backgroundColor: 'background.paper',
-        width: '50vw',
-        maxWidth: '700px',
-        fontFamily: 'Open Sans, sans-serif',
-        margin: 'auto',
-        marginTop: '20px',
-        marginBottom: '20px',
-        padding: '32px 40px 40px',
-      }}
-    >
-      <Typography sx={{ fontWeight: 600, mb: 1, fontSize: '16px', textAlign: 'center' }}>
-        {title}
-      </Typography>
-      <Divider sx={{ width: '100%' }} />
-      {!isExpanded && (
-        <Typography textAlign="center">
-          {description}
-        </Typography>
-      )}
+    <Box sx={{ p: 2, boxShadow: 3, borderRadius: 2, backgroundColor: 'background.paper', width: '50vw', maxWidth: '700px', margin: 'auto', padding: '32px 40px 40px' }}>
+      <Typography variant="h6" sx={{ mb: 1, textAlign: 'center' }}>{title}</Typography>
+      <Divider sx={{ my: 1 }} />
+      <Typography>{description}</Typography>
       {fullDescription && (
-        <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-          <ExpandMore
-            expand={isExpanded}
-            onClick={handleExpandClick}
-            aria-expanded={isExpanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
+        <Accordion expanded={expanded === 'panelFullDescription'} onChange={handleChange('panelFullDescription')} sx={{ mt: 2 }}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography sx={{ color: 'lightgray' }}>Full Description</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>{fullDescription}</Typography>
+          </AccordionDetails>
+        </Accordion>
+      )}
+      <Divider sx={{ my: 1 }} />
+      {examples && examples.length > 0 && (
+        <Box sx={{ mt: 2 }}>
+          <Typography sx={{ color: 'lightgray', mb: 1, textAlign: 'left' }}>Explanations</Typography>
+          {examples.map((example, index) => (
+            <Accordion key={`example-${index}`} expanded={expanded === `examplePanel${index}`} onChange={handleChange(`examplePanel${index}`)}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>{example.title}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>{example.text}</Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </Box>
       )}
-      <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-        <Typography paragraph textAlign="center">{fullDescription}</Typography>
-      </Collapse>
       {buttonText && (
-        <Button 
-          variant="outlined"
-          color="secondary"
-          disabled={!isButtonEnabled} 
-          onClick={handleButtonClick} 
-          sx={{ mt: 2 }}>
+        <Button variant="outlined" color="primary" disabled={false} onClick={onButtonClick} sx={{ mt: 2 }}>
           {buttonText}
         </Button>
       )}
@@ -96,4 +56,4 @@ const Text = ({ title, description, fullDescription, buttonText, buttonDelay, on
   );
 };
 
-export default Text;
+export default TextComponent;

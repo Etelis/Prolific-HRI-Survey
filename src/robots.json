@@ -1,0 +1,68 @@
+{
+    "categories": [
+      {
+        "name": "Anthropomorphic",
+        "robots": [
+          {
+            "imagePath": "https://i.ibb.co/HVF0Qgq/Dabo.png",
+            "name": "Dabo"
+          },
+          {
+            "imagePath": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/InMoov_Wheel_1.jpg/640px-InMoov_Wheel_1.jpg",
+            "name": "Imoove"
+          },
+          {
+            "imagePath": "https://i.ibb.co/G7scDd0/scitos.png",
+            "name": "Scitos"
+          },
+          {
+            "imagePath": "https://www.researchgate.net/publication/336036349/figure/fig1/AS:807788007673857@1569603077647/Photograph-of-the-Silbot-robot-used-in-the-study-photograph-courtesy-of-Lee-Howell.jpg",
+            "name": "SilBOT"
+          },
+          {
+            "imagePath": "https://i.insider.com/6579975050edbc52a863a5d6?width=700",
+            "name": "Optimus_2"
+          }
+        ]
+      },
+      {
+        "name": "Functional",
+        "robots": [
+          {
+            "imagePath": "https://i.ibb.co/3WbSD0j/HomeMate.png",
+            "name": "HomeMate"
+          },
+          {
+            "imagePath": "https://www.leobotics.fr/wp-content/uploads/2021/06/robot-de-reconnaissance-mobile-radiocommande-sauteur-10m-sandflea-boston-dynamics.png",
+            "name": "Sendflea"
+          }
+        ]
+      },
+      {
+        "name": "Zoomorphic",
+        "robots": [
+          {
+            "imagePath": "https://i.ibb.co/CKVTtLS/iCat.png",
+            "name": "iCat"
+          },
+          {
+            "imagePath": "https://eu-images.contentstack.com/v3/assets/blt31d6b0704ba96e9d/blt762668bd0db301a9/63abe9a71f477123c43d2b4a/boston-dynamics-spot.jpg",
+            "name": "spot"
+          },
+          {
+            "imagePath": "https://www.darpa.mil/DDM_Gallery/2013d_LS3_619x316.jpg",
+            "name": "ls3"
+          },
+          {
+            "imagePath": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Big_dog_military_robots.jpg",
+            "name": "bigdog"
+          },
+          {
+            "imagePath": "https://ologicinc.com/wp-content/uploads/2019/05/OrigamRobotics.jpg",
+            "name": "Romibo"
+          }
+        ]
+      }
+    ]
+  }
+  

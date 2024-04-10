@@ -1,0 +1,184 @@
+{
+  "skills": [
+   {
+  "name": "Memory Processes",
+  "shortDescription": "Storing and retrieving information through various mediums.",
+  "fullDescription": "Memory processes involve the storage of information in an appropriate medium, allowing it to be recovered at will through keys, queries, or mnemonics. This encompasses long-term and episodic memory, utilizing external devices such as books, spreadsheets, logs, databases, annotations, agendas, and other analog or digital data recording and retrieval systems. The key aspect of this ability is the creation of new memories, not just the recovery of existing ones.",
+  "items": [
+    {
+      "title": "Robot with Memory Processes",
+      "text": "A robot equipped with advanced memory processes can navigate complex environments by storing detailed maps and experiences. For instance, a search-and-rescue robot memorizes different terrains and structures it encounters, allowing it to navigate more efficiently in future missions. This capability stems from its ability to create and retrieve new memories, enhancing its learning and adaptability over time."
+    },
+    {
+      "title": "Robot Lacking Memory Processes",
+      "text": "A basic industrial robot performing repetitive tasks in a factory setting does not possess advanced memory processes. It follows pre-programmed instructions without the ability to store experiences or adapt based on past interactions. The absence of memory processes means it cannot improve efficiency or adapt to new tasks over time, highlighting the importance of memory in robots designed for complex and evolving environments."
+    }
+  ]
+},
+{
+  "name": "Sensorimotor Interaction",
+  "shortDescription": "Perception and manipulation of objects in environments using various modalities.",
+  "fullDescription": "Sensorimotor interaction encompasses the ability to perceive objects, recognize patterns, and manipulate these objects in both physical and virtual environments using body parts (like limbs) or other physical or virtual actuators. This skill is not limited to sensory and actuator modalities but also involves mixing representations for effective interaction. Different modalities, such as those used by blind individuals or technologies like radar in bats or robots, demonstrate the adaptability of sensorimotor interaction in understanding and manipulating the surrounding world.",
+  "items": [
+    {
+      "title": "Robot with Sensorimotor Interaction",
+      "text": "An autonomous robot designed for search-and-recovery tasks in disaster zones showcases sensorimotor interaction by navigating through rubble using tactile feedback and ultrasonic sensors to detect obstacles. It manipulates objects using articulated arms, adapting its grip based on the object's size, shape, and weight. This robot's ability to perceive and interact with its environment, combining various sensory inputs and motor outputs, allows it to efficiently locate and retrieve items under challenging conditions."
+    },
+    {
+      "title": "Robot Lacking Sensorimotor Interaction",
+      "text": "A conveyor belt robot in a manufacturing plant, designed to move products from one location to another, lacks the sensorimotor interaction capabilities. It operates in a highly controlled environment with minimal variability and does not require perception of its surroundings or the objects it transports. The lack of sensory and actuator modalities to adapt to changing environments or manipulate objects based on their physical properties illustrates a robot devoid of sensorimotor interaction skills."
+    }
+  ]
+},
+{
+  "name": "Visual Processing",
+  "shortDescription": "Interpreting visual information with robustness to variations.",
+  "fullDescription": "Visual processing involves the ability to process visual information, including the recognition of objects and symbols in images and videos, as well as identifying movement and content changes. It requires robustness to noise, variations in angles, and transformations to ensure accurate interpretation. This skill is critical for both robots and humans to navigate, understand, and interact with their environments effectively, excluding the assessment of the consistency of what is seen.",
+  "items": [
+    {
+      "title": "Robot with Visual Processing",
+      "text": "An autonomous vehicle uses advanced visual processing to navigate roads safely. It interprets traffic signs, signals, pedestrians, and other vehicles in real-time, adjusting its path accordingly. This involves recognizing static and moving elements across various conditions such as lighting changes, weather effects, and obstructions, showcasing the vehicle's ability to process complex visual information and make split-second decisions based on this data."
+    },
+    {
+      "title": "Robot Lacking Visual Processing",
+      "text": "A traditional industrial robot arm used for assembling parts in a factory setting demonstrates a lack of visual processing capabilities. It operates based on pre-programmed instructions without the ability to recognize or adapt to changes in its visual environment. This limitation means it cannot detect variations in the parts it handles or adjust its operations in response to visual cues, highlighting the importance of visual processing in adaptive and flexible robotics applications."
+    }
+  ]
+},
+{
+  "name": "Auditory Processing",
+  "shortDescription": "Understanding auditory information in diverse environments.",
+  "fullDescription": "Auditory processing encompasses the ability to interpret auditory information, such as speech and music, within noisy environments and across different frequencies. It involves recognizing specific sounds, signals, alarms, speech patterns, melodies, and rhythms, crucial for effective communication and interaction with the environment. While this skill includes recognizing various auditory inputs, it does not necessitate a complete understanding of sentences or a subjective perception of harmony in music.",
+  "items": [
+    {
+      "title": "Robot with Auditory Processing",
+      "text": "A service robot in a busy airport lounge uses auditory processing to detect announcements, respond to verbal commands, and recognize the urgency of alarms amidst background noise. This robot effectively filters out irrelevant sounds, focusing on pertinent auditory information to assist passengers, showcasing its ability to recognize and act upon specific sounds, speech, and signals in a challenging auditory environment."
+    },
+    {
+      "title": "Robot Lacking Auditory Processing",
+      "text": "A factory automation robot designed to perform specific tasks in a controlled environment lacks auditory processing capabilities. It operates in a consistent noise level without the need to recognize or respond to changes in auditory information. This limitation means it cannot react to verbal commands, alarms, or changes in the auditory environment, highlighting the importance of auditory processing in robots intended for interactive or dynamic settings."
+    }
+  ]
+},
+{
+  "name": "Planning, Sequential Decision-Making and Acting",
+  "shortDescription": "Anticipating actions' outcomes and deciding on the best course of action.",
+  "fullDescription": "This skill involves the ability to anticipate the consequences of actions, understand causality, and calculate the best course of action given a situation. It requires evaluating the effects of different sequences of events, planning various courses of actions, and making decisions accordingly. This skill focuses on scenarios where planning under mostly consistent information is possible and involves sequences, time, or other dependencies, excluding simple actions or decisions and complex reasoning processes about the world.",
+  "items": [
+    {
+      "title": "Robot with Planning and Sequential Decision-Making Capability",
+      "text": "A robotic assistant designed for disaster relief operations exemplifies this skill by evaluating the consequences of its actions in dynamic, uncertain environments. It plans rescue operations by considering various factors such as safety, time, and resources, deciding on the sequence of actions that maximize the effectiveness of the mission. This involves navigating debris, choosing paths that avoid hazards, and prioritizing tasks in a sequence that optimizes the rescue effort."
+    },
+    {
+      "title": "Robot Lacking Planning and Sequential Decision-Making Capability",
+      "text": "A simple robotic vacuum cleaner operates with a basic level of decision-making that does not involve advanced planning or understanding of action consequences beyond immediate surroundings. It follows a random or predetermined path without anticipating obstacles' long-term effects or planning the most efficient cleaning route. The lack of sequential decision-making and planning illustrates its limitations in adapting to complex environments and performing tasks that require considering sequences and dependencies."
+    }
+  ]
+},
+{
+  "name": "Comprehension and Expression",
+  "shortDescription": "Understanding and generating complex semantic content.",
+  "fullDescription": "Comprehension and expression involve understanding natural language, other kinds of semantic representations across different modalities, and extracting or summarizing their meaning. It also encompasses generating and expressing ideas, stories, and positions. This skill requires interpreting text, stories, and other representations of ideas in various formats, along with the composition or transformation of similar texts, stories, or narratives, effectively summarizing or expressing ideas. It's applicable across modalities such as text, auditory formats, and visual representations but goes beyond the processing of simple, predefined phrases or symbols to include the understanding or compositional use of elements that form coherent wholes.",
+  "items": [
+    {
+      "title": "Robot with Comprehension and Expression Capabilities",
+      "text": "An AI-driven interactive storytelling robot exemplifies this skill by not only understanding the intricate plots of stories told to it but also by creating its own stories and summarizing complex narratives. It listens to or reads stories in various formats, interprets the underlying themes, and generates new, coherent narratives that incorporate elements from the original stories, tailored to the listener's preferences and responses. This demonstrates the robot's ability to comprehend and express complex ideas in a creative and engaging manner."
+    },
+    {
+      "title": "Robot Lacking Comprehension and Expression Capabilities",
+      "text": "A chatbot programmed with a limited set of responses to specific commands or questions lacks the capability for genuine comprehension and expression. It operates by matching user inputs to its pre-defined database of responses without truly understanding the content or context of the conversation. This limitation prevents it from summarizing stories, generating new ideas, or engaging in creative expression, illustrating the gap between simple programmed interactions and the complex task of understanding and composing semantic content."
+    }
+  ]
+},
+{
+  "name": "Communication",
+  "shortDescription": "Exchanging information effectively across different channels.",
+  "fullDescription": "Communication involves the exchange of information with peers, understanding the necessary content of a message to achieve a desired effect, and utilizing different protocols and channels of both informal and formal communication. This skill requires that messages are sent, received, and processed appropriately by all interested parties, encompassing a range of communication registers and ensuring clarity and understanding regardless of the medium. It focuses on the mechanics and effectiveness of communication channels rather than the narratives contained within the messages.",
+  "items": [
+    {
+      "title": "Entity with Effective Communication Skills",
+      "text": "A sophisticated customer service AI exhibits effective communication by engaging with users across multiple platforms, including text, voice, and even visual channels. It adapts its register and protocol depending on the context, ensuring that the information is conveyed clearly and understood by the user, regardless of the complexity of the inquiry or the communication medium. This AI's ability to interpret queries accurately and provide relevant, understandable responses in real-time demonstrates a high level of competency in communication."
+    },
+    {
+      "title": "Entity Lacking Communication Skills",
+      "text": "A basic notification system that sends alerts via a single channel, without considering the recipient's preferences or the context of the communication, demonstrates a lack of communication skills. It operates on a one-size-fits-all basis, potentially leading to misunderstandings or missed messages due to the inflexibility of its communication method. The inability to adjust the communication style or channel according to the needs of the recipient highlights the importance of versatile communication strategies for effective information exchange."
+    }
+  ]
+},
+{
+  "name": "Emotion and Self-Control",
+  "shortDescription": "Understanding and managing emotions in oneself and others.",
+  "fullDescription": "Emotion and self-control involve recognizing and understanding the emotions of other agents and their effects on behavior, as well as identifying one's own emotions and controlling them along with other basic impulses as the situation demands. This skill encompasses discerning the authenticity of emotions, expressing appropriate emotional reactions, and applying emotions and self-control in the right context. It focuses on the immediate emotional aspects and control thereof, excluding the broader complexities of social modeling and anticipation.",
+  "items": [
+    {
+      "title": "Entity with Emotion and Self-Control Capabilities",
+      "text": "An AI-powered therapy robot designed to support individuals through counseling sessions exemplifies this skill by recognizing the emotional states of its users, distinguishing between genuine and feigned emotions, and responding with appropriate empathy and support. It adjusts its responses and advice based on the user's emotional cues, demonstrating self-control by maintaining a supportive and calm demeanor throughout the interaction. This showcases its ability to use emotional understanding and self-control to foster a helpful and therapeutic environment."
+    },
+    {
+      "title": "Entity Lacking Emotion and Self-Control",
+      "text": "A traditional industrial robot, while highly efficient in performing repetitive tasks, lacks the capability to understand or exhibit emotions and self-control. It operates based solely on programmed instructions without the ability to perceive emotional states or adjust its actions accordingly. The absence of this skill means it cannot engage in interactions that require emotional intelligence, such as adapting its behavior in response to human emotions or controlling its own 'emotional' reactions in varying contexts."
+    }
+  ]
+},
+{
+  "name": "Navigation",
+  "shortDescription": "Moving through environments safely and efficiently.",
+  "fullDescription": "Navigation involves the ability to transfer objects or oneself from one place to another across different scales, such as within rooms, buildings, towns, landscapes, and along roads. This skill requires understanding and utilizing basic concepts of locations and directions, which can be achieved through various modalities and approaches like landmarking and geolocation. Navigation entails identifying and following appropriate, safe routes while adapting to the presence of other objects or agents and any changes that may occur in the environment.",
+  "items": [
+    {
+      "title": "Entity with Navigation Capability",
+      "text": "An autonomous delivery drone represents a prime example of navigation capability, as it transports packages from warehouses to specific addresses. It utilizes GPS for geolocation, computer vision for obstacle avoidance, and machine learning to optimize routes in real-time, considering weather conditions and no-fly zones. The drone's ability to navigate efficiently in complex, changing environments showcases advanced navigation skills that encompass spatial awareness, safety, and adaptability."
+    },
+    {
+      "title": "Entity Lacking Navigation Capability",
+      "text": "A stationary manufacturing robot, while highly skilled at performing its designated tasks within a specific area, lacks navigation capabilities. It cannot move itself or objects to different locations, relying instead on humans or other mobile robots for transportation. The absence of navigation skills in this robot underscores its limitation to a fixed environment, highlighting the contrast with entities designed for mobility and adaptability across varying spatial contexts."
+    }
+  ]
+},
+{
+  "name": "Conceptualization, Learning, and Abstraction",
+  "shortDescription": "Generalizing from examples and building knowledge at different abstraction levels.",
+  "fullDescription": "This skill encompasses the ability to generalize from examples, receive instructions, learn from demonstrations, and accumulate knowledge at different levels of abstraction. It involves generating different levels of abstractions, either provided by peers or self-generated, with knowledge being incrementally built upon previously acquired knowledge. This process of learning or abstraction is not merely reliant on applying past concepts or operations but requires the ongoing development of new understandings and insights to complete tasks effectively.",
+  "items": [
+    {
+      "title": "Entity with Conceptualization, Learning, and Abstraction Capabilities",
+      "text": "A machine learning algorithm designed for natural language processing (NLP) demonstrates this skill by not only understanding and processing language based on pre-existing data but also by learning from new inputs to improve its comprehension and output over time. It abstracts patterns from individual examples to understand grammar and syntax rules at a broader level, adapting its models to better interpret and generate language. This continuous learning and abstraction process allows it to refine its knowledge and capabilities incrementally."
+    },
+    {
+      "title": "Entity Lacking Conceptualization, Learning, and Abstraction",
+      "text": "A basic calculator program, while proficient at performing arithmetic operations specified by the user, lacks the ability to conceptualize, learn, or abstract. It operates based on a fixed set of rules without the capacity to generalize from examples or adapt its operations based on new information. The absence of learning or abstraction capabilities confines it to the operations and knowledge it was originally programmed with, illustrating a stark contrast to entities capable of learning and developing over time."
+    }
+  ]
+},
+{
+  "name": "Quantitative and Logical Reasoning",
+  "shortDescription": "Deducing new insights from quantitative or logical information.",
+  "fullDescription": "Quantitative and logical reasoning involves the representation of quantitative or logical information intrinsic to a task and the inference of new information from them that solves the task. This includes handling probabilities, counterfactuals, and engaging in various kinds of analytical reasoning. The task inherently requires generating new conclusions or facts from quantities, logical facts, or rules provided as inputs, and it entails detecting inconsistencies and fallacies. This skill surpasses mere combinations of rules or instructions, focusing on the active engagement with and transformation of given information to derive solutions.",
+  "items": [
+    {
+      "title": "Entity with Quantitative and Logical Reasoning Capabilities",
+      "text": "An AI system designed for financial analysis exemplifies this skill by evaluating market data, financial reports, and economic indicators to forecast stock trends. It applies complex quantitative models and logical reasoning to predict future market movements, identifying inconsistencies in data and potential investment opportunities. This process involves synthesizing vast amounts of quantitative information and applying logical rules to generate actionable insights, demonstrating advanced analytical reasoning capabilities."
+    },
+    {
+      "title": "Entity Lacking Quantitative and Logical Reasoning",
+      "text": "A digital clock, while capable of keeping and displaying time accurately, lacks the capacity for quantitative and logical reasoning beyond its programmed functions. It does not infer new information from the data it handles or engage in analytical reasoning about time or its representation. The absence of this skill means it cannot perform tasks that require interpretation, prediction, or the drawing of new conclusions from quantitative or logical data, underscoring a clear distinction from entities capable of complex reasoning."
+    }
+  ]
+},
+{
+  "name": "Metacognition and Confidence Assessment",
+  "shortDescription": "Evaluating one's own capabilities and limitations.",
+  "fullDescription": "Metacognition and confidence assessment involve the evaluation of one's own capabilities, reliability, and limitations, self-assessing the probability of success, and the effort and risks of one's own actions. This skill requires accurately recognizing one's own strengths and weaknesses, knowing when to assume responsibilities, and when to delegate tasks and risks according to competences. This goes beyond simple planning or the selection of actions based on the highest probability or utility, encompassing the estimation and appropriate use of confidence in actions.",
+  "items": [
+    {
+      "title": "Entity with Metacognition and Confidence Assessment Capabilities",
+      "text": "An autonomous navigation system in self-driving vehicles showcases this skill by continuously evaluating its performance in real-world conditions, adjusting its decision-making process based on the reliability of its sensors and algorithms. It assesses its capability to handle complex traffic situations and decides when to request human intervention based on its confidence level. This self-awareness ensures the vehicle operates within its limits, optimizing safety and efficiency by appropriately balancing autonomy with the need for human oversight."
+    },
+    {
+      "title": "Entity Lacking Metacognition and Confidence Assessment",
+      "text": "A simple robotic vacuum cleaner operates with predefined routines and lacks the ability to assess its own performance or make decisions beyond its basic programming. It cannot evaluate the probability of successfully navigating obstacles based on past experiences or adjust its actions according to its limitations. The absence of metacognitive skills means it cannot delegate tasks or assess risks, limiting its functionality to straightforward, predictable environments without the need for complex decision-making."
+    }
+  ]
+}
+  ]
+}
