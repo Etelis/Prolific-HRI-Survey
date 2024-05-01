@@ -12,6 +12,10 @@ import robotsData from './robots.json'
 
 registerCoreBlocks();
 
+const redirectToProlific = () => {
+  window.location.href = 'https://www.prolific.co';
+};
+
 function getSkillLabelAndExplanation(skillLevel) {
   const skillDescriptions = {
     1: { label: "Not at all", explanation: "The robot does not possess this skill in any capacity." },
@@ -37,11 +41,11 @@ function generateEvaluationBlocks(randomRobots, randomSkills) {
 
   // Iterate over each robot
   console.log(randomRobots)
-  randomRobots.forEach((robot, robotIndex) => {
+  randomSkills.forEach((skill, skillIndex) => {
     // For each robot, iterate over the random skills
-    randomSkills.forEach((skill, skillIndex) => {
+    randomRobots.forEach((robot, robotIndex) => {
       // Generate unique IDs
-      const groupId = `${robot.name}_${skillIndex + 1}`;
+      const groupId = `${robot.name}_${robotIndex + 1}_${skillIndex}`;
       const skillTextBlockId = `${robot.name}_${skill.name}`;
       const optionScaleId = `${robot.name}_${skill.name}_rating`;
 
@@ -56,14 +60,14 @@ function generateEvaluationBlocks(randomRobots, randomSkills) {
               type: "image",
               url: robot.imagePath
             },
-          description: "Examine the image and the skill provided below. Determine to what extent the robot presented possess the skill described."
+          description: `Examine the image and the skill provided below. Determine to what extent the robot presented possess ${skill.name}.`
         },
         innerBlocks: [
           {
             name: "skill-text-block",
             id: skillTextBlockId,
             attributes: {
-              skillName: skill.name,
+              skillName:`Skill: ${skill.name}`,
               shortDescription: skill.shortDescription,
               fullDescription: skill.fullDescription,
               items: skill.items.map(item => ({
@@ -77,7 +81,7 @@ function generateEvaluationBlocks(randomRobots, randomSkills) {
             id: optionScaleId,
             attributes: {
               label: "Skill Evaluation",
-              description: "On a scale of 1 to 7, to what extent do you believe the robot shown possesses the skill described?",
+              description: `On a scale of 1 to 7, to what extent do you believe the robot shown possesses ${skill.name}?`,
               required: true,
               start: 1,
               end: 7,
@@ -111,6 +115,7 @@ function generateEvaluationBlocks(randomRobots, randomSkills) {
 
   return blocks;
 }
+
 
 function selectRobots(robotsData) {
   // Select one robot from each category
@@ -150,8 +155,9 @@ const App = () => {
     setRandomSkills(getRandomSkills(skillsData.skills));
     setrandomRobots(selectRobots(robotsData))
   }, []);
-  const concentAnswer = useFieldAnswer("agree_disagree");
   const exampleAnswer = useFieldAnswer("example-rating-answer");
+  const definitionsClear = useFieldAnswer("definitions-clear-question");
+
   const getFormBlocks = () => {
     const blocks = generateEvaluationBlocks(randomRobots, randomSkills)
     const preDynamicBlocks = [
@@ -203,6 +209,13 @@ const App = () => {
             }
           },
           {
+            "name": "tutorial-text-block",
+            "id": "click_to_expand",
+            "attributes": {
+              "text": "You can click on the text to expand it.",
+            }
+          },
+          {
             name: "multiple-choice",
             id: "agree_disagree",
             attributes: {
@@ -214,6 +227,10 @@ const App = () => {
                 {
                   label: "I agree",
                   value: "agree"
+                },
+                {
+                  label: "I do not agree",
+                  value: "idontagree"
                 }
               ]
             }
@@ -310,9 +327,9 @@ const App = () => {
         "name": "statement",
         "id": "g91imf1023",
         "attributes": {
-          "label": "Let's do an example",
-          "description": "Next, we'll show you an example to illustrate how you'll be evaluating the robots. This example will help clarify what's expected in the upcoming sections of the survey.",
-          "buttonText": "View Example",
+          "label": "So what is this survey about?",
+          "description": "In this survey we want your honest expectations regarding the capabilities and skills of different robots. Click the button below to see how it is done.",
+          "buttonText": "Show me!",
           "quotationMarks": false
         }
       },
@@ -327,15 +344,21 @@ const App = () => {
             "type": "image",
             "url": "https://i.insider.com/65e04b136080194819fb1a66?width=1136&format=jpeg"
           },
-          "description": "This tutorial will guide you through evaluating a robot's skill based on an image. The image on the right features the robot you will assess. You will determine how well the robot exemplifies a specific skill detailed below."
+          "description": "This tutorial will guide you through the process of evaluating a robot's skill based on it's image. The image on the right features the robot you are currently assessing. You will determine how well the robot exemplifies a specific skill detailed below."
         },
         "innerBlocks": [
-          
+          {
+            "name": "tutorial-text-block",
+            "id": "sample_label_evaluate_robot_explain",
+            "attributes": {
+              "text": "Please note the text below provides an explanation of the skill. This explanation does not relate to about the specific robot but rather describes the skill itself",
+          }
+        },
           {
             "name": "skill-text-block",
             "id": "jg1401rssdd",
             "attributes": {
-              "skillName": "Sensorimotor Interaction",
+              "skillName": "Skill: Sensorimotor Interaction",
               "shortDescription": "Perception and manipulation of objects in environments using various modalities.",
               "fullDescription": "Sensorimotor interaction encompasses the ability to perceive objects, recognize patterns, and manipulate these objects in both physical and virtual environments using body parts (like limbs) or other physical or virtual actuators. This skill is not limited to sensory and actuator modalities but also involves mixing representations for effective interaction. Different modalities, such as those used by blind individuals or technologies like radar in bats or robots, demonstrate the adaptability of sensorimotor interaction in understanding and manipulating the surrounding world.",
               "items": [
@@ -362,7 +385,7 @@ const App = () => {
             "id": "example-rating-answer",
             "attributes": {
               "label": "Skill Evaluation Scale",
-              "description": "Using a scale of 1 to 7, please rate how well you believe the robot demonstrates the described skill, with 1 being 'Not at all' and 7 being 'Completely'.",
+              "description": "Using a scale of 1 to 7, please rate to what extent you belive the described robot possess the described skill, with 1 being 'Not at all' and 7 being 'Completely'.",
               "required": true,
               "start": 1,
               "end": 7,
@@ -402,7 +425,7 @@ const App = () => {
         "name": "statement",
         "id": "343892jsdd",
         "attributes": {
-          label: `Let's begin the study!"`,
+          label: `Let's begin the study!`,
           description:"There are no right or wrong answers. Please respond based on your true opinion.",
           "buttonText": "Begin",
           "quotationMarks": false,
@@ -411,6 +434,46 @@ const App = () => {
     ]
 
     const postDynamicBlocks = [
+      {
+        name: "multiple-choice",
+        id: "definitions-clear-question",
+        attributes: {
+          required: true,
+          label: "Were all definitions during the survey clear to you?",
+          choices: [
+            {
+              label: "Yes",
+              value: "yes"
+            },
+            {
+              label: "No",
+              value: "no"
+            }
+          ]
+        }
+      },
+      ...(definitionsClear?.includes("no")
+        ? [
+            {
+              name: "long-text",
+              id: "unclear-definitions",
+              attributes: {
+                required: true,
+                label: "Please specify which definitions were not clear."
+              }
+            }
+          ]
+        : []),
+      {
+      "name": "statement",
+      "id": "thank_for_answering",
+      "attributes": {
+        label: `Thank you for answering this survey`,
+        description:"We have couple more questions to ask regarding the survey itself.",
+        "buttonText": "OK",
+        "quotationMarks": false,
+      }
+    },
     {
       name: "long-text",
       id: "problems_finish",
@@ -427,7 +490,7 @@ const App = () => {
         required: true,
         label: "Any suggestions for improving the survey?"
       }
-    },
+    }
 ]
     return [...preDynamicBlocks, ...blocks, ...postDynamicBlocks];
   }
@@ -442,8 +505,12 @@ const App = () => {
             animationDirection: "vertical",
             disableWheelSwiping: true,
             disableNavigationArrows: true,
-            disableProgressBar: false
+            disableProgressBar: true
           },
+          messages: {
+            'block.defaultThankYouScreen.label': "Thank you for participating"
+          },
+
           theme: {
             font: "Roboto",
             buttonsBgColor: "#0060df",
@@ -466,6 +533,33 @@ const App = () => {
             completeForm();
           }, 500);
         }}
+        beforeGoingNext={
+          ({
+            setIsFieldValid,
+            setIsPending,
+            currentBlockId,
+            answers,
+            setFieldValidationErr,
+            setIsCurrentBlockSafeToSwipe,
+            goToBlock,
+            goNext
+          }) => {
+            if (
+             currentBlockId === "informed_concent_group" &&
+             answers['agree_disagree'].value[0] === "idontagree"
+           ) {
+             redirectToProlific();
+             setIsFieldValid(currentBlockId, false);
+             setFieldValidationErr(currentBlockId, "This is a test");
+             setIsCurrentBlockSafeToSwipe(false);
+           } else {
+             setIsFieldValid(currentBlockId, true);
+             setFieldValidationErr(currentBlockId, "");
+             setIsCurrentBlockSafeToSwipe(true);
+             goNext();
+           }
+         }
+        }
       />
     </div>
   );
