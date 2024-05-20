@@ -9,7 +9,7 @@
     "@mui/material": "^5.15.15",
     "@quillforms/blocks": "^4.1.4",
     "@quillforms/react-renderer-utils": "^5.10.0",
-    "@quillforms/renderer-core": "^5.8.0",
+    "@quillforms/renderer-core": "^5.9.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Form, useFieldAnswer } from "@quillforms/renderer-core";
 import "@quillforms/renderer-core/build-style/style.css";
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
@@ -7,169 +7,24 @@ import "./skill-block"
 import "./optionscale"
 import "./tutorial-text"
 
-import skillsData from './skills.json';
-import robotsData from './robots.json'
-
 registerCoreBlocks();
 
 const redirectToProlific = () => {
   window.location.href = 'https://www.prolific.co';
 };
 
-function getSkillLabelAndExplanation(skillLevel) {
-  const skillDescriptions = {
-    1: { label: "Not at all", explanation: "The robot does not possess this skill in any capacity." },
-    2: { label: "Barely", explanation: "The robot possesses this skill to a minimal extent, indicating rudimentary or basic functionality." },
-    3: { label: "Somewhat", explanation: "The robot somewhat possesses this skill, showing a moderate level of functionality." },
-    4: { label: "Moderately", explanation: "The robot possesses this skill at a moderate level, capable of performing tasks requiring this skill with a fair degree of efficiency." },
-    5: { label: "Very much", explanation: "The robot very much possesses this skill, demonstrating a high level of proficiency and capability." },
-    6: { label: "Extremely", explanation: "The robot possesses this skill to an extreme degree, indicating advanced functionality and expertise." },
-    7: { label: "Completely", explanation: "The robot completely possesses this skill, showcasing maximum proficiency and the ability to perform related tasks flawlessly." },
-  };
-
-  return skillDescriptions[skillLevel] || { label: "Unknown", explanation: "The provided number is outside the expected range of skill levels." };
-}
-
-function getRandomSkills(skills, count = 5) {
-  const shuffled = skills.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
-}
-
-function generateEvaluationBlocks(randomRobots, randomSkills) {
-  // Initialize an array to hold all the blocks
-  let blocks = [];
-
-  // Iterate over each robot
-  console.log(randomRobots)
-  randomSkills.forEach((skill, skillIndex) => {
-    // For each robot, iterate over the random skills
-    randomRobots.forEach((robot, robotIndex) => {
-      // Generate unique IDs
-      const groupId = `${robot.name}_${robotIndex + 1}_${skillIndex}`;
-      const skillTextBlockId = `${robot.name}_${skill.name}`;
-      const optionScaleId = `${robot.name}_${skill.name}_rating`;
-
-      // Construct the block for the current robot and skill
-      const block = {
-        id: groupId,
-        name: "group",
-        attributes: {
-          label: "Evaluate the following:",
-          layout: "split-right",
-          attachment: {
-              type: "image",
-              url: robot.imagePath
-            },
-          description: `Examine the image and the skill provided below. Determine to what extent the robot presented possess ${skill.name}.`
-        },
-        innerBlocks: [
-          {
-            name: "skill-text-block",
-            id: skillTextBlockId,
-            attributes: {
-              skillName:`Skill: ${skill.name}`,
-              shortDescription: skill.shortDescription,
-              fullDescription: skill.fullDescription,
-              items: skill.items.map(item => ({
-                title: item.title,
-                text: item.text
-              }))
-            }
-          },  
-          {
-            name: "option-scale",
-            id: optionScaleId,
-            attributes: {
-              label: "Skill Evaluation",
-              description: `On a scale of 1 to 7, to what extent do you believe the robot shown possesses ${skill.name}?`,
-              required: true,
-              start: 1,
-              end: 7,
-              startLabel: "Not at all",
-              endLabel: "Completely",
-              labels: {
-                1: "Not at all",
-                2: "Barely",
-                3: "Somewhat",
-                4: "Moderately",
-                5: "Very much",
-                6: "Extremely",
-                7: "Completely"
-              }
-            }
-          },
-          {
-            "name": "tutorial-text-block",
-            "id": "before_processding",
-            "attributes": {
-              "text": "Take your time to evaluate. Once you're ready, click the OK button to proceed.",
-            }
-          }
-        ]
-      };
-
-      // Add the constructed block to the blocks array
-      blocks.push(block);
-    });
-  });
-
-  return blocks;
-}
-
-
-function selectRobots(robotsData) {
-  // Select one robot from each category
-  const selectedRobots = robotsData.categories.map(category => {
-    const randomIndex = Math.floor(Math.random() * category.robots.length);
-    return {
-      ...category.robots[randomIndex],
-      categoryName: category.name
-    };
-  });
-
-  // Combine all robots into a single array
-  const allRobots = robotsData.categories.flatMap(category => 
-    category.robots.map(robot => ({ ...robot, categoryName: category.name }))
-  );
-
-  // Filter out the already selected robots
-  const remainingRobots = allRobots.filter(robot =>
-    !selectedRobots.find(selectedRobot => selectedRobot.imagePath === robot.imagePath)
-  );
-
-  // Shuffle the remaining robots
-  const shuffledRemainingRobots = remainingRobots.sort(() => 0.5 - Math.random());
-
-  // Select 2 additional robots from the shuffled remaining robots
-  const additionalRobots = shuffledRemainingRobots.slice(0, 2);
-
-  // Combine the initially selected robots with the additional robots
-  return selectedRobots.concat(additionalRobots);
-}
-
 const App = () => {
-  const [randomSkills, setRandomSkills] = useState([]);
-  const [randomRobots, setrandomRobots] = useState([]);
-
-  useEffect(() => {
-    setRandomSkills(getRandomSkills(skillsData.skills));
-    setrandomRobots(selectRobots(robotsData))
-  }, []);
-  const exampleAnswer = useFieldAnswer("example-rating-answer");
   const definitionsClear = useFieldAnswer("definitions-clear-question");
 
   const getFormBlocks = () => {
-    const blocks = generateEvaluationBlocks(randomRobots, randomSkills)
     const preDynamicBlocks = [
       {
         name: "welcome-screen",
         id: "jg1401r",
         attributes: {
-          label: "Welcome to this Human Robots Interaction survey",
-          description: `In this survey, you will be presented with images of various robots.
-          For each robot, you will be asked to rate to what extent you believe
-          the robot possesses certain skills. Your honest ratings will help us understand 
-          human perception of robotic capabilities`,
+          label: "Survey on Bystander Assistance to Robots",
+          description: `We are conducting a survey to understand the factors that influence a bystander’s willingness to assist robots in different scenarios. Your responses will help us design better robotic systems. 
+          This survey will take approximately 10 minutes.`,
         }
       },
       {
@@ -237,21 +92,21 @@ const App = () => {
           },
         ]
       },
-      {
-        name: "short-text",
-        id: "kd12edg",
-        attributes: {
-          layout: "center",
-          required: true,
-          label: `Thank you for agreeing!`,
-          description: "Let's start with your name"
-        }
-      },
+      // {
+      //   name: "short-text",
+      //   id: "kd12edg",
+      //   attributes: {
+      //     layout: "center",
+      //     required: true,
+      //     label: `Thank you for agreeing!`,
+      //     description: "Let's start with your name"
+      //   }
+      // },
       {
         name: "slider",
         id: "93pda11",
         attributes: {
-          label: "Hi {{field:kd12edg}}! Please select your age",
+          label: "Thank you for agreeing! Please select your age",
           min: 18,
           max: 100,
           step: 1
@@ -264,7 +119,7 @@ const App = () => {
           required: true,
           multiple: false,
           verticalAlign: false,
-          label: "{{field:kd12edg}}, please select your gender",
+          label: "Please select your gender",
           choices: [
             {
               label: "Male",
@@ -322,118 +177,627 @@ const App = () => {
           ]
         }
       },
-
+      {
+        name: "multiple-choice",
+        id: "gqr1294c1",
+        attributes: {
+          required: true,
+          multiple: false,
+          verticalAlign: false,
+          label: "How familiar are you with robots",
+          choices: [
+            {
+              label: "Not at all familiar",
+              value: "naaf"
+            },
+            {
+              label: "Somewhat familiar",
+              value: "swf"
+            },
+            {
+              label: "Very familiar",
+              value: "vf"
+            }
+          ]
+        }
+      },
       {
         "name": "statement",
         "id": "g91imf1023",
         "attributes": {
-          "label": "So what is this survey about?",
-          "description": "In this survey we want your honest expectations regarding the capabilities and skills of different robots. Click the button below to see how it is done.",
+          "label": "Let's begin with some general questions.",
+          "description": "Next you will see some questions and a likert scale, you should choose from 1 to 7 the number that is most suiteable.",
           "buttonText": "Show me!",
           "quotationMarks": false
         }
       },
-
       {
-        "id": "sdfdfvsdf",
-        "name": "group",
+        "name": "option-scale",
+        "id": "general_q1",
         "attributes": {
-          "label": "Tutorial Example",
-          "layout": "split-right",
-          "attachment": {
-            "type": "image",
-            "url": "https://i.insider.com/65e04b136080194819fb1a66?width=1136&format=jpeg"
-          },
-          "description": "This tutorial will guide you through the process of evaluating a robot's skill based on it's image. The image on the right features the robot you are currently assessing. You will determine how well the robot exemplifies a specific skill detailed below."
-        },
-        "innerBlocks": [
-          {
-            "name": "tutorial-text-block",
-            "id": "sample_label_evaluate_robot_explain",
-            "attributes": {
-              "text": "Please note the text below provides an explanation of the skill. This explanation does not relate to about the specific robot but rather describes the skill itself",
+          "label": "How comfortable are you with the idea of robots operating in public spaces?",
+          "description": "Using a scale of 1 to 7, please rate your level of comfort with robots operating in public spaces, with 1 being 'Not comfortable at all' and 7 being 'Completely comfortable'.",
+          "required": true,
+          "start": 1,
+          "end": 7,
+          "startLabel": "Not at all",
+          "endLabel": "Completely",
+          "labels": {
+            "1": "Not at all",
+            "2": "Barely",
+            "3": "Somewhat",
+            "4": "Moderately",
+            "5": "Very much",
+            "6": "Extremely",
+            "7": "Completely"
           }
-        },
-          {
-            "name": "skill-text-block",
-            "id": "jg1401rssdd",
-            "attributes": {
-              "skillName": "Skill: Sensorimotor Interaction",
-              "shortDescription": "Perception and manipulation of objects in environments using various modalities.",
-              "fullDescription": "Sensorimotor interaction encompasses the ability to perceive objects, recognize patterns, and manipulate these objects in both physical and virtual environments using body parts (like limbs) or other physical or virtual actuators. This skill is not limited to sensory and actuator modalities but also involves mixing representations for effective interaction. Different modalities, such as those used by blind individuals or technologies like radar in bats or robots, demonstrate the adaptability of sensorimotor interaction in understanding and manipulating the surrounding world.",
-              "items": [
-                {
-                  "title": "Robot with Sensorimotor Interaction",
-                  "text": "An autonomous robot designed for search-and-recovery tasks in disaster zones showcases sensorimotor interaction by navigating through rubble using tactile feedback and ultrasonic sensors to detect obstacles. It manipulates objects using articulated arms, adapting its grip based on the object's size, shape, and weight. This robot's ability to perceive and interact with its environment, combining various sensory inputs and motor outputs, allows it to efficiently locate and retrieve items under challenging conditions."
-                },
-                {
-                  "title": "Robot Lacking Sensorimotor Interaction",
-                  "text": "A conveyor belt robot in a manufacturing plant, designed to move products from one location to another, lacks the sensorimotor interaction capabilities. It operates in a highly controlled environment with minimal variability and does not require perception of its surroundings or the objects it transports. The lack of sensory and actuator modalities to adapt to changing environments or manipulate objects based on their physical properties illustrates a robot devoid of sensorimotor interaction skills."
-                }
-              ]
-            }
-          },
-          {
-            "name": "tutorial-text-block",
-            "id": "sample_label_evaluate_robot",
-            "attributes": {
-              "text": "You can expand the description of the skill for more details, as well as each example for examples regarding this skill.",
+        }
+      }, 
+      {
+        "name": "option-scale",
+        "id": "general_q2",
+        "attributes": {
+          "label": "How likely are you to help a robot if it asked for assistance?",
+          "description": "Using a scale of 1 to 7, please rate your likelihood of helping a robot that asks for assistance, with 1 being 'Not likely at all' and 7 being 'Extremely likely'.",
+          "required": true,
+          "start": 1,
+          "end": 7,
+          "startLabel": "Not likely at all",
+          "endLabel": "Extremely likely",
+          "labels": {
+            "1": "Not likely at all",
+            "2": "Barely likely",
+            "3": "Somewhat likely",
+            "4": "Moderately likely",
+            "5": "Very likely",
+            "6": "Extremely likely",
+            "7": "Certain"
           }
-        },
-          {
-            "name": "option-scale",
-            "id": "example-rating-answer",
-            "attributes": {
-              "label": "Skill Evaluation Scale",
-              "description": "Using a scale of 1 to 7, please rate to what extent you belive the described robot possess the described skill, with 1 being 'Not at all' and 7 being 'Completely'.",
-              "required": true,
-              "start": 1,
-              "end": 7,
-              "startLabel": "Not at all",
-              "endLabel": "Completely",
-              "labels": {
-                "1": "Not at all",
-                "2": "Barely",
-                "3": "Somewhat",
-                "4": "Moderately",
-                "5": "Very much",
-                "6": "Extremely",
-                "7": "Completely"
-              }
-            }
-          },
-          {
-            "name": "tutorial-text-block",
-            "id": "before_processding",
-            "attributes": {
-              "text": "Take your time to evaluate. Once you're ready, click the OK button to proceed.",
-            }
-          }
-        ]
+        }
       },
       {
-        "name": "statement",
-        "id": "343892jd",
+        "name": "option-scale",
+        "id": "general_q3",
         "attributes": {
-          label: `Your selection: {{field:example-rating-answer}} - "${getSkillLabelAndExplanation(exampleAnswer)['label']}"`,
-          description: `This rating indicates that ${getSkillLabelAndExplanation(exampleAnswer)['explanation']}`,
-          buttonText: "I understand",
-          quotationMarks: false,
+          "label": "How important do you think it is for robots to be able to ask for human help?",
+          "description": "Using a scale of 1 to 7, please rate the importance of robots being able to ask for human help, with 1 being 'Not important at all' and 7 being 'Extremely important'.",
+          "required": true,
+          "start": 1,
+          "end": 7,
+          "startLabel": "Not important at all",
+          "endLabel": "Extremely important",
+          "labels": {
+            "1": "Not important at all",
+            "2": "Barely important",
+            "3": "Somewhat important",
+            "4": "Moderately important",
+            "5": "Very important",
+            "6": "Extremely important",
+            "7": "Crucial"
+          }
         }
       },
       {
         "name": "statement",
         "id": "343892jsdd",
         "attributes": {
-          label: `Let's begin the study!`,
-          description:"There are no right or wrong answers. Please respond based on your true opinion.",
+          "label": `Next you will be presented with scenarios`,
+          "description":"Answer the likert questions based on each scenario, there are no right or wrong answers here. ",
           "buttonText": "Begin",
           "quotationMarks": false,
         }
+      },    
+      {
+        "id": "scenarios_1",
+        "name": "group",
+        "attributes": {
+          "label": "Scenario 1",
+          "layout": "split-right",
+          "attachment": {
+            "type": "image",
+            "url": "https://c.files.bbci.co.uk/221C/production/_128023780_snobot.jpg"
+          },
+          "description": "A delivery robot is stuck on a snowy sidewalk and cannot move."
+        },
+        "innerBlocks": [
+          {
+            "name": "option-scale",
+            "id": "scenarios_1_q1",
+            "attributes": {
+              "label": "How likely are you to help this robot in this scenario?",
+              "description": "Using a scale of 1 to 7, please rate your likelihood of helping this robot, with 1 being 'Not likely at all' and 7 being 'Extremely likely'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "Not likely at all",
+              "endLabel": "Extremely likely",
+              "labels": {
+                "1": "Not likely at all",
+                "2": "Slightly likely",
+                "3": "Somewhat likely",
+                "4": "Moderately likely",
+                "5": "Very likely",
+                "6": "Highly likely",
+                "7": "Extremely likely"
+              }
+            }
+          },
+          {
+            "name": "option-scale",
+            "id": "scenarios_1_q3",
+            "attributes": {
+              "label": "How urgent does this task seem to you?",
+              "description": "Using a scale of 1 to 7, please rate the urgency of this task, with 1 being 'Not urgent at all' and 7 being 'Extremely urgent'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "Not urgent at all",
+              "endLabel": "Extremely urgent",
+              "labels": {
+                "1": "Not urgent at all",
+                "2": "Slightly urgent",
+                "3": "Somewhat urgent",
+                "4": "Moderately urgent",
+                "5": "Very urgent",
+                "6": "Highly urgent",
+                "7": "Extremely urgent"
+              }
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_1_q4",
+            "attributes": {
+              "required": true,
+              "label": "What aspects of the task make it seem urgent?"
+            }
+          },
+          {
+            "name": "option-scale",
+            "id": "scenarios_1_q5",
+            "attributes": {
+              "label": "How important do you think this task is?",
+              "description": "Using a scale of 1 to 7, please rate the importance of this task, with 1 being 'Not important at all' and 7 being 'Extremely important'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "Not important at all",
+              "endLabel": "Extremely important",
+              "labels": {
+                "1": "Not important at all",
+                "2": "Slightly important",
+                "3": "Somewhat important",
+                "4": "Moderately important",
+                "5": "Very important",
+                "6": "Highly important",
+                "7": "Extremely important"
+              }
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_1_q6",
+            "attributes": {
+              "required": true,
+              "label": "What aspects of the task make it seem important?"
+            }
+          },
+          {
+            "name": "option-scale",
+            "id": "scenarios_1_q7",
+            "attributes": {
+              "label": "How does the surrounding environment affect your decision to help the robot?",
+              "description": "Using a scale of 1 to 7, please rate the influence of the environment, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "No influence at all",
+              "endLabel": "Extremely influential",
+              "labels": {
+                "1": "No influence at all",
+                "2": "Slight influence",
+                "3": "Somewhat influential",
+                "4": "Moderately influential",
+                "5": "Very influential",
+                "6": "Highly influential",
+                "7": "Extremely influential"
+              }
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_1_q8",
+            "attributes": {
+              "required": true,
+              "label": "What specific aspects of the environment (e.g., weather, crowd density) would influence your decision to help?"
+            }
+          },
+          {
+            "name": "option-scale",
+            "id": "scenarios_1_q9",
+            "attributes": {
+              "label": "How do the appearance and behavior of the robot affect your decision to help?",
+              "description": "Using a scale of 1 to 7, please rate the influence of the robot's appearance and behavior, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "No influence at all",
+              "endLabel": "Extremely influential",
+              "labels": {
+                "1": "No influence at all",
+                "2": "Slight influence",
+                "3": "Somewhat influential",
+                "4": "Moderately influential",
+                "5": "Very influential",
+                "6": "Highly influential",
+                "7": "Extremely influential"
+              }
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_1_q10",
+            "attributes": {
+              "required": true,
+              "label": "What specific aspects of the robot (e.g., its limitations, design) would influence your decision to help?"
+            }
+          }
+        ]
       },
+      {
+        "id": "scenarios_2",
+        "name": "group",
+        "attributes": {
+          "label": "Scenario 2",
+          "layout": "split-right",
+          "attachment": {
+            "type": "image",
+            "url": "https://i.ibb.co/2NK8ZZZ/DALL-E-2024-05-20-12-08-38-A-small-humanoid-service-robot-in-a-hospital-struggling-to-click-the-elev.png"
+          },
+          "description": "A robot in a hospital needs to use the elevator, but due to its height, it cannot reach the elevator button and requires assistance."
+        },
+        "innerBlocks": [
+          {
+            "name": "option-scale",
+            "id": "scenarios_2_q1",
+            "attributes": {
+              "label": "How likely are you to help this robot in this scenario?",
+              "description": "Using a scale of 1 to 7, please rate your likelihood of helping this robot, with 1 being 'Not likely at all' and 7 being 'Extremely likely'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "Not likely at all",
+              "endLabel": "Extremely likely",
+              "labels": {
+                "1": "Not likely at all",
+                "2": "Slightly likely",
+                "3": "Somewhat likely",
+                "4": "Moderately likely",
+                "5": "Very likely",
+                "6": "Highly likely",
+                "7": "Extremely likely"
+              }
+            }
+          },
+          {
+            "name": "option-scale",
+            "id": "scenarios_2_q3",
+            "attributes": {
+              "label": "How urgent does this task seem to you?",
+              "description": "Using a scale of 1 to 7, please rate the urgency of this task, with 1 being 'Not urgent at all' and 7 being 'Extremely urgent'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "Not urgent at all",
+              "endLabel": "Extremely urgent",
+              "labels": {
+                "1": "Not urgent at all",
+                "2": "Slightly urgent",
+                "3": "Somewhat urgent",
+                "4": "Moderately urgent",
+                "5": "Very urgent",
+                "6": "Highly urgent",
+                "7": "Extremely urgent"
+              }
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_2_q4",
+            "attributes": {
+              "required": true,
+              "label": "What aspects of the task make it seem urgent?"
+            }
+          },
+          {
+            "name": "option-scale",
+            "id": "scenarios_2_q5",
+            "attributes": {
+              "label": "How important do you think this task is?",
+              "description": "Using a scale of 1 to 7, please rate the importance of this task, with 1 being 'Not important at all' and 7 being 'Extremely important'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "Not important at all",
+              "endLabel": "Extremely important",
+              "labels": {
+                "1": "Not important at all",
+                "2": "Slightly important",
+                "3": "Somewhat important",
+                "4": "Moderately important",
+                "5": "Very important",
+                "6": "Highly important",
+                "7": "Extremely important"
+              }
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_2_q6",
+            "attributes": {
+              "required": true,
+              "label": "What aspects of the task make it seem important?"
+            }
+          },
+          {
+            "name": "option-scale",
+            "id": "scenarios_2_q7",
+            "attributes": {
+              "label": "How does the surrounding environment affect your decision to help the robot?",
+              "description": "Using a scale of 1 to 7, please rate the influence of the environment, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "No influence at all",
+              "endLabel": "Extremely influential",
+              "labels": {
+                "1": "No influence at all",
+                "2": "Slight influence",
+                "3": "Somewhat influential",
+                "4": "Moderately influential",
+                "5": "Very influential",
+                "6": "Highly influential",
+                "7": "Extremely influential"
+              }
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_2_q8",
+            "attributes": {
+              "required": true,
+              "label": "What specific aspects of the environment (e.g., weather, crowd density) would influence your decision to help?"
+            }
+          },
+          {
+            "name": "option-scale",
+            "id": "scenarios_2_q9",
+            "attributes": {
+              "label": "How do the appearance and behavior of the robot affect your decision to help?",
+              "description": "Using a scale of 1 to 7, please rate the influence of the robot's appearance and behavior, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "No influence at all",
+              "endLabel": "Extremely influential",
+              "labels": {
+                "1": "No influence at all",
+                "2": "Slight influence",
+                "3": "Somewhat influential",
+                "4": "Moderately influential",
+                "5": "Very influential",
+                "6": "Highly influential",
+                "7": "Extremely influential"
+              }
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_2_q10",
+            "attributes": {
+              "required": true,
+              "label": "What specific aspects of the robot (e.g., its limitations, design) would influence your decision to help?"
+            }
+          }
+        ]
+      },
+      {
+        "id": "scenarios_3",
+        "name": "group",
+        "attributes": {
+          "label": "Scenario 3",
+          "layout": "split-right",
+          "attachment": {
+            "type": "image",
+            "url": "https://i.ibb.co/HNQhpW0/DALL-E-2024-05-20-12-25-50-A-robot-sorting-garbage-with-three-waste-containers-in-front-of-it-The-le.png"
+          },
+          "description": "A robot that sorts items into bins of plastic and glass encounters an object that it cannot identify and requires human assistance."
+        },
+        "innerBlocks": [
+          {
+            "name": "option-scale",
+            "id": "scenarios_3_q1",
+            "attributes": {
+              "label": "How likely are you to help this robot in this scenario?",
+              "description": "Using a scale of 1 to 7, please rate your likelihood of helping this robot, with 1 being 'Not likely at all' and 7 being 'Extremely likely'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "Not likely at all",
+              "endLabel": "Extremely likely",
+              "labels": {
+                "1": "Not likely at all",
+                "2": "Slightly likely",
+                "3": "Somewhat likely",
+                "4": "Moderately likely",
+                "5": "Very likely",
+                "6": "Highly likely",
+                "7": "Extremely likely"
+              }
+            }
+          },
+          {
+            "name": "option-scale",
+            "id": "scenarios_3_q3",
+            "attributes": {
+              "label": "How urgent does this task seem to you?",
+              "description": "Using a scale of 1 to 7, please rate the urgency of this task, with 1 being 'Not urgent at all' and 7 being 'Extremely urgent'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "Not urgent at all",
+              "endLabel": "Extremely urgent",
+              "labels": {
+                "1": "Not urgent at all",
+                "2": "Slightly urgent",
+                "3": "Somewhat urgent",
+                "4": "Moderately urgent",
+                "5": "Very urgent",
+                "6": "Highly urgent",
+                "7": "Extremely urgent"
+              }
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_3_q4",
+            "attributes": {
+              "required": true,
+              "label": "What aspects of the task make it seem urgent?"
+            }
+          },
+          {
+            "name": "option-scale",
+            "id": "scenarios_3_q5",
+            "attributes": {
+              "label": "How important do you think this task is?",
+              "description": "Using a scale of 1 to 7, please rate the importance of this task, with 1 being 'Not important at all' and 7 being 'Extremely important'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "Not important at all",
+              "endLabel": "Extremely important",
+              "labels": {
+                "1": "Not important at all",
+                "2": "Slightly important",
+                "3": "Somewhat important",
+                "4": "Moderately important",
+                "5": "Very important",
+                "6": "Highly important",
+                "7": "Extremely important"
+              }
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_3_q6",
+            "attributes": {
+              "required": true,
+              "label": "What aspects of the task make it seem important?"
+            }
+          },
+          {
+            "name": "option-scale",
+            "id": "scenarios_3_q7",
+            "attributes": {
+              "label": "How does the surrounding environment affect your decision to help the robot?",
+              "description": "Using a scale of 1 to 7, please rate the influence of the environment, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "No influence at all",
+              "endLabel": "Extremely influential",
+              "labels": {
+                "1": "No influence at all",
+                "2": "Slight influence",
+                "3": "Somewhat influential",
+                "4": "Moderately influential",
+                "5": "Very influential",
+                "6": "Highly influential",
+                "7": "Extremely influential"
+              }
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_3_q8",
+            "attributes": {
+              "required": true,
+              "label": "What specific aspects of the environment (e.g., weather, crowd density) would influence your decision to help?"
+            }
+          },
+          {
+            "name": "option-scale",
+            "id": "scenarios_3_q9",
+            "attributes": {
+              "label": "How do the appearance and behavior of the robot affect your decision to help?",
+              "description": "Using a scale of 1 to 7, please rate the influence of the robot's appearance and behavior, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
+              "required": true,
+              "start": 1,
+              "end": 7,
+              "startLabel": "No influence at all",
+              "endLabel": "Extremely influential",
+              "labels": {
+                "1": "No influence at all",
+                "2": "Slight influence",
+                "3": "Somewhat influential",
+                "4": "Moderately influential",
+                "5": "Very influential",
+                "6": "Highly influential",
+                "7": "Extremely influential"
+              }
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_3_q10",
+            "attributes": {
+              "required": true,
+              "label": "What specific aspects of the robot (e.g., its limitations, design) would influence your decision to help?"
+            }
+          }
+        ]
+      },
+      {
+        "id": "additional_questions",
+        "name": "group",
+        "attributes": {
+          "label": "Just a couple more questions..",
+          "layout": "split-right"
+        },
+        "innerBlocks": [
+          {
+            "name": "long-text",
+            "id": "additional_factors",
+            "attributes": {
+              "required": true,
+              "label": "What additional factors would make you more likely to help a robot?"
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "definite_help_situation",
+            "attributes": {
+              "required": true,
+              "label": "Can you describe a situation where you would definitely help a robot?"
+            }
+          }
+        ]
+      }
+      
     ]
 
     const postDynamicBlocks = [
+      {
+        "name": "statement",
+        "id": "thank_for_answering",
+        "attributes": {
+          label: `Thank you for answering this survey`,
+          description:"We have couple more questions to ask regarding the survey itself.",
+          "buttonText": "OK",
+          "quotationMarks": false,
+        }
+      },
       {
         name: "multiple-choice",
         id: "definitions-clear-question",
@@ -464,16 +828,6 @@ const App = () => {
             }
           ]
         : []),
-      {
-      "name": "statement",
-      "id": "thank_for_answering",
-      "attributes": {
-        label: `Thank you for answering this survey`,
-        description:"We have couple more questions to ask regarding the survey itself.",
-        "buttonText": "OK",
-        "quotationMarks": false,
-      }
-    },
     {
       name: "long-text",
       id: "problems_finish",
@@ -482,7 +836,6 @@ const App = () => {
         label: "Any problems you faced during the survey?"
       }
     },
-
     {
       name: "long-text",
       id: "suggestions_finish",
@@ -492,7 +845,7 @@ const App = () => {
       }
     }
 ]
-    return [...preDynamicBlocks, ...blocks, ...postDynamicBlocks];
+    return [...preDynamicBlocks, ...postDynamicBlocks];
   }
   return (
     <div style={{ width: "100%", height: "100vh" }}>
