@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, useFieldAnswer } from "@quillforms/renderer-core";
 import "@quillforms/renderer-core/build-style/style.css";
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
 import "./styles.css";
-import "./skill-block"
-import "./optionscale"
-import "./tutorial-text"
+import "./skill-block";
+import "./optionscale";
+import "./tutorial-text";
 
 registerCoreBlocks();
 
@@ -14,8 +14,30 @@ const redirectToProlific = () => {
 };
 
 const App = () => {
-  const definitionsClear = useFieldAnswer("definitions-clear-question");
+  const [urlParams, setUrlParams] = useState({
+    PROLIFIC_PID: '',
+    STUDY_ID: '',
+    SESSION_ID: ''
+  });
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const prolificPid = params.get('PROLIFIC_PID');
+    const studyId = params.get('STUDY_ID');
+    const sessionId = params.get('SESSION_ID');
+
+    if (!prolificPid || !studyId || !sessionId) {
+      redirectToProlific();
+    } else {
+      setUrlParams({
+        PROLIFIC_PID: prolificPid,
+        STUDY_ID: studyId,
+        SESSION_ID: sessionId
+      });
+    }
+  }, []);
+  
+  const definitionsClear = useFieldAnswer("definitions-clear-question");
   const getFormBlocks = () => {
     const preDynamicBlocks = [
       {
