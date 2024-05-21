@@ -6,6 +6,7 @@ import "./styles.css";
 import "./skill-block";
 import "./optionscale";
 import "./tutorial-text";
+import { DataArray } from '@mui/icons-material';
 
 registerCoreBlocks();
 
@@ -27,7 +28,7 @@ const App = () => {
     const sessionId = params.get('SESSION_ID');
 
     if (!prolificPid || !studyId || !sessionId) {
-      redirectToProlific();
+      // redirectToProlific();
     } else {
       setUrlParams({
         PROLIFIC_PID: prolificPid,
@@ -36,7 +37,81 @@ const App = () => {
       });
     }
   }, []);
-  
+
+  const handleFinishPageComplete = (data) => {
+    const getSingleValue = (field) => {
+        const value = data.answers[field]?.value;
+        return Array.isArray(value) ? value[0] : value;
+    };
+
+    const filteredAnswers = {
+        gender: getSingleValue('gender'),
+        education_level: data.answers.education_level?.value,
+        are_you_fimilar_with_robots: getSingleValue('are_you_fimilar_with_robots'),
+        general_q1: data.answers.general_q1?.value,
+        general_q2: data.answers.general_q2?.value,
+        general_q3: data.answers.general_q3?.value,
+        scenarios_1_q1: data.answers.scenarios_1_q1?.value,
+        scenarios_1_q3: data.answers.scenarios_1_q3?.value,
+        scenarios_1_q4: data.answers.scenarios_1_q4?.value,
+        scenarios_1_q5: data.answers.scenarios_1_q5?.value,
+        scenarios_1_q6: data.answers.scenarios_1_q6?.value,
+        scenarios_1_q7: data.answers.scenarios_1_q7?.value,
+        scenarios_1_q8: data.answers.scenarios_1_q8?.value,
+        scenarios_1_q9: data.answers.scenarios_1_q9?.value,
+        scenarios_1_q10: data.answers.scenarios_1_q10?.value,
+        scenarios_2_q1: data.answers.scenarios_2_q1?.value,
+        scenarios_2_q3: data.answers.scenarios_2_q3?.value,
+        scenarios_2_q4: data.answers.scenarios_2_q4?.value,
+        scenarios_2_q5: data.answers.scenarios_2_q5?.value,
+        scenarios_2_q6: data.answers.scenarios_2_q6?.value,
+        scenarios_2_q7: data.answers.scenarios_2_q7?.value,
+        scenarios_2_q8: data.answers.scenarios_2_q8?.value,
+        scenarios_2_q9: data.answers.scenarios_2_q9?.value,
+        scenarios_2_q10: data.answers.scenarios_2_q10?.value,
+        scenarios_3_q1: data.answers.scenarios_3_q1?.value,
+        scenarios_3_q3: data.answers.scenarios_3_q3?.value,
+        scenarios_3_q4: data.answers.scenarios_3_q4?.value,
+        scenarios_3_q5: data.answers.scenarios_3_q5?.value,
+        scenarios_3_q6: data.answers.scenarios_3_q6?.value,
+        scenarios_3_q7: data.answers.scenarios_3_q7?.value,
+        scenarios_3_q8: data.answers.scenarios_3_q8?.value,
+        scenarios_3_q9: data.answers.scenarios_3_q9?.value,
+        scenarios_3_q10: data.answers.scenarios_3_q10?.value,
+        additional_factors: data.answers.additional_factors?.value,
+        definite_help_situation: data.answers.definite_help_situation?.value,
+        definitions_clear_question: data.answers.definitions_clear_question?.value,
+        unclear_definitions: data.answers.unclear_definitions?.value, // This might not exist
+        problems_finish: data.answers.problems_finish?.value,
+        suggestions_finish: data.answers.suggestions_finish?.value,
+    };
+
+    const completedSurveyData = { 
+        data: filteredAnswers,
+        version: "1",
+        ...urlParams
+    };
+    console.log(completedSurveyData);
+
+    // Send data to the server
+    fetch("https://24d6houomeioliarmgrwonbi7m0nmblf.lambda-url.eu-central-1.on.aws/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(completedSurveyData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.completionLink) {
+            window.location.href = data.completionLink;
+        }
+    })
+    .catch(error => console.error('Error:', error));
+};
+
+// Usage example for your form component
+<Form onFinish={handleFinishPageComplete} />
+
+
   const definitionsClear = useFieldAnswer("definitions-clear-question");
   const getFormBlocks = () => {
     const preDynamicBlocks = [
@@ -136,7 +211,7 @@ const App = () => {
       },
       {
         name: "multiple-choice",
-        id: "gqr1294c",
+        id: "gender",
         attributes: {
           required: true,
           multiple: false,
@@ -160,7 +235,7 @@ const App = () => {
       },
       {
         "name": "dropdown",
-        "id": "3nsdf934",
+        "id": "education_level",
         "attributes": {
           "label": "Please select your education level.",
           "choices": [
@@ -201,7 +276,7 @@ const App = () => {
       },
       {
         name: "multiple-choice",
-        id: "gqr1294c1",
+        id: "are_you_fimilar_with_robots",
         attributes: {
           required: true,
           multiple: false,
@@ -822,7 +897,7 @@ const App = () => {
       },
       {
         name: "multiple-choice",
-        id: "definitions-clear-question",
+        id: "definitions_clear_question",
         attributes: {
           required: true,
           label: "Were all definitions during the survey clear to you?",
@@ -842,7 +917,7 @@ const App = () => {
         ? [
             {
               name: "long-text",
-              id: "unclear-definitions",
+              id: "unclear_definitions",
               attributes: {
                 required: true,
                 label: "Please specify which definitions were not clear."
@@ -903,6 +978,7 @@ const App = () => {
           }
         }}
         onSubmit={(data, { completeForm, setIsSubmitting }) => {
+          handleFinishPageComplete(data)
           setTimeout(() => {
             setIsSubmitting(false);
             completeForm();
