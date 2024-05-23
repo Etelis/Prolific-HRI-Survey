@@ -57,27 +57,18 @@ const App = () => {
         scenarios_1_q5: data.answers.scenarios_1_q5?.value,
         scenarios_1_q6: data.answers.scenarios_1_q6?.value,
         scenarios_1_q7: data.answers.scenarios_1_q7?.value,
-        scenarios_1_q8: data.answers.scenarios_1_q8?.value,
-        scenarios_1_q9: data.answers.scenarios_1_q9?.value,
-        scenarios_1_q10: data.answers.scenarios_1_q10?.value,
         scenarios_2_q1: data.answers.scenarios_2_q1?.value,
         scenarios_2_q3: data.answers.scenarios_2_q3?.value,
         scenarios_2_q4: data.answers.scenarios_2_q4?.value,
         scenarios_2_q5: data.answers.scenarios_2_q5?.value,
         scenarios_2_q6: data.answers.scenarios_2_q6?.value,
         scenarios_2_q7: data.answers.scenarios_2_q7?.value,
-        scenarios_2_q8: data.answers.scenarios_2_q8?.value,
-        scenarios_2_q9: data.answers.scenarios_2_q9?.value,
-        scenarios_2_q10: data.answers.scenarios_2_q10?.value,
         scenarios_3_q1: data.answers.scenarios_3_q1?.value,
         scenarios_3_q3: data.answers.scenarios_3_q3?.value,
         scenarios_3_q4: data.answers.scenarios_3_q4?.value,
         scenarios_3_q5: data.answers.scenarios_3_q5?.value,
         scenarios_3_q6: data.answers.scenarios_3_q6?.value,
         scenarios_3_q7: data.answers.scenarios_3_q7?.value,
-        scenarios_3_q8: data.answers.scenarios_3_q8?.value,
-        scenarios_3_q9: data.answers.scenarios_3_q9?.value,
-        scenarios_3_q10: data.answers.scenarios_3_q10?.value,
         additional_factors: data.answers.additional_factors?.value,
         definite_help_situation: data.answers.definite_help_situation?.value,
         definitions_clear_question: data.answers.definitions_clear_question?.value,
@@ -87,9 +78,9 @@ const App = () => {
     };
 
     const completedSurveyData = { 
-        data: filteredAnswers,
-        version: "1",
-        ...urlParams
+      version: "1",
+      ...urlParams,
+      ...filteredAnswers
     };
     console.log(completedSurveyData);
 
@@ -121,7 +112,7 @@ const App = () => {
         attributes: {
           label: "Survey on Bystander Assistance to Robots",
           description: `We are conducting a survey to understand the factors that influence a bystander’s willingness to assist robots in different scenarios. Your responses will help us design better robotic systems. 
-          This survey will take approximately 10 minutes.`,
+          This survey will take approximately 5 minutes.`,
         }
       },
       {
@@ -237,6 +228,7 @@ const App = () => {
         "name": "dropdown",
         "id": "education_level",
         "attributes": {
+          "required": true,
           "label": "Please select your education level.",
           "choices": [
             {
@@ -378,12 +370,12 @@ const App = () => {
         "name": "statement",
         "id": "343892jsdd",
         "attributes": {
-          "label": `Next you will be presented with scenarios`,
-          "description":"Answer the likert questions based on each scenario, there are no right or wrong answers here. ",
+          "label": "Next, you will be presented with various scenarios",
+          "description": "For each scenario, you will see a simplified description followed by questions. Please think about what factors in the scenario, if elaborated by the robot, would motivate you to help. There are no right or wrong answers.",
           "buttonText": "Begin",
-          "quotationMarks": false,
+          "quotationMarks": false
         }
-      },    
+      },
       {
         "id": "scenarios_1",
         "name": "group",
@@ -394,7 +386,7 @@ const App = () => {
             "type": "image",
             "url": "https://c.files.bbci.co.uk/221C/production/_128023780_snobot.jpg"
           },
-          "description": "A delivery robot is stuck on a snowy sidewalk and cannot move."
+          "description": "Imagine you come across a delivery robot stuck in the snow, similar to the one shown in the image."
         },
         "innerBlocks": [
           {
@@ -420,68 +412,16 @@ const App = () => {
             }
           },
           {
+            "name": "long-text",
+            "id": "scenarios_1_q2",
+            "attributes": {
+              "required": true,
+              "label": "What information could the robot communicate to you that would increase your motivation to help? (e.g., the urgency of the situation, its current task, any rewards for helping)"
+            }
+          },
+          {
             "name": "option-scale",
             "id": "scenarios_1_q3",
-            "attributes": {
-              "label": "How urgent does this task seem to you?",
-              "description": "Using a scale of 1 to 7, please rate the urgency of this task, with 1 being 'Not urgent at all' and 7 being 'Extremely urgent'.",
-              "required": true,
-              "start": 1,
-              "end": 7,
-              "startLabel": "Not urgent at all",
-              "endLabel": "Extremely urgent",
-              "labels": {
-                "1": "Not urgent at all",
-                "2": "Slightly urgent",
-                "3": "Somewhat urgent",
-                "4": "Moderately urgent",
-                "5": "Very urgent",
-                "6": "Highly urgent",
-                "7": "Extremely urgent"
-              }
-            }
-          },
-          {
-            "name": "long-text",
-            "id": "scenarios_1_q4",
-            "attributes": {
-              "required": true,
-              "label": "What aspects of the task make it seem urgent?"
-            }
-          },
-          {
-            "name": "option-scale",
-            "id": "scenarios_1_q5",
-            "attributes": {
-              "label": "How important do you think this task is?",
-              "description": "Using a scale of 1 to 7, please rate the importance of this task, with 1 being 'Not important at all' and 7 being 'Extremely important'.",
-              "required": true,
-              "start": 1,
-              "end": 7,
-              "startLabel": "Not important at all",
-              "endLabel": "Extremely important",
-              "labels": {
-                "1": "Not important at all",
-                "2": "Slightly important",
-                "3": "Somewhat important",
-                "4": "Moderately important",
-                "5": "Very important",
-                "6": "Highly important",
-                "7": "Extremely important"
-              }
-            }
-          },
-          {
-            "name": "long-text",
-            "id": "scenarios_1_q6",
-            "attributes": {
-              "required": true,
-              "label": "What aspects of the task make it seem important?"
-            }
-          },
-          {
-            "name": "option-scale",
-            "id": "scenarios_1_q7",
             "attributes": {
               "label": "How does the surrounding environment affect your decision to help the robot?",
               "description": "Using a scale of 1 to 7, please rate the influence of the environment, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
@@ -503,40 +443,26 @@ const App = () => {
           },
           {
             "name": "long-text",
-            "id": "scenarios_1_q8",
+            "id": "scenarios_1_q4",
             "attributes": {
               "required": true,
-              "label": "What specific aspects of the environment (e.g., weather, crowd density) would influence your decision to help?"
-            }
-          },
-          {
-            "name": "option-scale",
-            "id": "scenarios_1_q9",
-            "attributes": {
-              "label": "How do the appearance and behavior of the robot affect your decision to help?",
-              "description": "Using a scale of 1 to 7, please rate the influence of the robot's appearance and behavior, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
-              "required": true,
-              "start": 1,
-              "end": 7,
-              "startLabel": "No influence at all",
-              "endLabel": "Extremely influential",
-              "labels": {
-                "1": "No influence at all",
-                "2": "Slight influence",
-                "3": "Somewhat influential",
-                "4": "Moderately influential",
-                "5": "Very influential",
-                "6": "Highly influential",
-                "7": "Extremely influential"
-              }
+              "label": "What environmental information would be helpful to know (e.g., weather conditions, crowd density)? "
             }
           },
           {
             "name": "long-text",
-            "id": "scenarios_1_q10",
+            "id": "scenarios_1_q6",
             "attributes": {
               "required": true,
-              "label": "What specific aspects of the robot (e.g., its limitations, design) would influence your decision to help?"
+              "label": "What aspects of the robot's limitations (e.g., its inability to move in snow) and specific needs (e.g., needing a push) would make you more inclined to help? How should the robot convey these limitations?"
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_1_q7",
+            "attributes": {
+              "required": true,
+              "label": "How would knowing the importance and urgency of the robot's task affect your decision to help? What details would be most convincing?"
             }
           }
         ]
@@ -577,68 +503,16 @@ const App = () => {
             }
           },
           {
+            "name": "long-text",
+            "id": "scenarios_2_q2",
+            "attributes": {
+              "required": true,
+              "label": "What information could the robot communicate to you that would increase your motivation to help? (e.g., the urgency of the situation, its current task, any rewards for helping)"
+            }
+          },
+          {
             "name": "option-scale",
             "id": "scenarios_2_q3",
-            "attributes": {
-              "label": "How urgent does this task seem to you?",
-              "description": "Using a scale of 1 to 7, please rate the urgency of this task, with 1 being 'Not urgent at all' and 7 being 'Extremely urgent'.",
-              "required": true,
-              "start": 1,
-              "end": 7,
-              "startLabel": "Not urgent at all",
-              "endLabel": "Extremely urgent",
-              "labels": {
-                "1": "Not urgent at all",
-                "2": "Slightly urgent",
-                "3": "Somewhat urgent",
-                "4": "Moderately urgent",
-                "5": "Very urgent",
-                "6": "Highly urgent",
-                "7": "Extremely urgent"
-              }
-            }
-          },
-          {
-            "name": "long-text",
-            "id": "scenarios_2_q4",
-            "attributes": {
-              "required": true,
-              "label": "What aspects of the task make it seem urgent?"
-            }
-          },
-          {
-            "name": "option-scale",
-            "id": "scenarios_2_q5",
-            "attributes": {
-              "label": "How important do you think this task is?",
-              "description": "Using a scale of 1 to 7, please rate the importance of this task, with 1 being 'Not important at all' and 7 being 'Extremely important'.",
-              "required": true,
-              "start": 1,
-              "end": 7,
-              "startLabel": "Not important at all",
-              "endLabel": "Extremely important",
-              "labels": {
-                "1": "Not important at all",
-                "2": "Slightly important",
-                "3": "Somewhat important",
-                "4": "Moderately important",
-                "5": "Very important",
-                "6": "Highly important",
-                "7": "Extremely important"
-              }
-            }
-          },
-          {
-            "name": "long-text",
-            "id": "scenarios_2_q6",
-            "attributes": {
-              "required": true,
-              "label": "What aspects of the task make it seem important?"
-            }
-          },
-          {
-            "name": "option-scale",
-            "id": "scenarios_2_q7",
             "attributes": {
               "label": "How does the surrounding environment affect your decision to help the robot?",
               "description": "Using a scale of 1 to 7, please rate the influence of the environment, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
@@ -660,15 +534,15 @@ const App = () => {
           },
           {
             "name": "long-text",
-            "id": "scenarios_2_q8",
+            "id": "scenarios_2_q4",
             "attributes": {
               "required": true,
-              "label": "What specific aspects of the environment (e.g., weather, crowd density) would influence your decision to help?"
+              "label": "How does the surrounding environment (e.g., hospital setting, presence of other people) influence your decision to help the robot? What environmental information would be helpful to know?"
             }
           },
           {
             "name": "option-scale",
-            "id": "scenarios_2_q9",
+            "id": "scenarios_2_q5",
             "attributes": {
               "label": "How do the appearance and behavior of the robot affect your decision to help?",
               "description": "Using a scale of 1 to 7, please rate the influence of the robot's appearance and behavior, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
@@ -690,10 +564,18 @@ const App = () => {
           },
           {
             "name": "long-text",
-            "id": "scenarios_2_q10",
+            "id": "scenarios_2_q6",
             "attributes": {
               "required": true,
-              "label": "What specific aspects of the robot (e.g., its limitations, design) would influence your decision to help?"
+              "label": "What aspects of the robot's limitations (e.g., its inability to reach the button) and specific needs (e.g., needing someone to press the button) would make you more inclined to help? How should the robot convey these limitations?"
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_2_q7",
+            "attributes": {
+              "required": true,
+              "label": "How would knowing the importance and urgency of the robot's task affect your decision to help? What details would be most convincing?"
             }
           }
         ]
@@ -734,68 +616,16 @@ const App = () => {
             }
           },
           {
+            "name": "long-text",
+            "id": "scenarios_3_q2",
+            "attributes": {
+              "required": true,
+              "label": "What information could the robot communicate to you that would increase your motivation to help? (e.g., the urgency of the situation, its current task, any rewards for helping)"
+            }
+          },
+          {
             "name": "option-scale",
             "id": "scenarios_3_q3",
-            "attributes": {
-              "label": "How urgent does this task seem to you?",
-              "description": "Using a scale of 1 to 7, please rate the urgency of this task, with 1 being 'Not urgent at all' and 7 being 'Extremely urgent'.",
-              "required": true,
-              "start": 1,
-              "end": 7,
-              "startLabel": "Not urgent at all",
-              "endLabel": "Extremely urgent",
-              "labels": {
-                "1": "Not urgent at all",
-                "2": "Slightly urgent",
-                "3": "Somewhat urgent",
-                "4": "Moderately urgent",
-                "5": "Very urgent",
-                "6": "Highly urgent",
-                "7": "Extremely urgent"
-              }
-            }
-          },
-          {
-            "name": "long-text",
-            "id": "scenarios_3_q4",
-            "attributes": {
-              "required": true,
-              "label": "What aspects of the task make it seem urgent?"
-            }
-          },
-          {
-            "name": "option-scale",
-            "id": "scenarios_3_q5",
-            "attributes": {
-              "label": "How important do you think this task is?",
-              "description": "Using a scale of 1 to 7, please rate the importance of this task, with 1 being 'Not important at all' and 7 being 'Extremely important'.",
-              "required": true,
-              "start": 1,
-              "end": 7,
-              "startLabel": "Not important at all",
-              "endLabel": "Extremely important",
-              "labels": {
-                "1": "Not important at all",
-                "2": "Slightly important",
-                "3": "Somewhat important",
-                "4": "Moderately important",
-                "5": "Very important",
-                "6": "Highly important",
-                "7": "Extremely important"
-              }
-            }
-          },
-          {
-            "name": "long-text",
-            "id": "scenarios_3_q6",
-            "attributes": {
-              "required": true,
-              "label": "What aspects of the task make it seem important?"
-            }
-          },
-          {
-            "name": "option-scale",
-            "id": "scenarios_3_q7",
             "attributes": {
               "label": "How does the surrounding environment affect your decision to help the robot?",
               "description": "Using a scale of 1 to 7, please rate the influence of the environment, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
@@ -817,15 +647,15 @@ const App = () => {
           },
           {
             "name": "long-text",
-            "id": "scenarios_3_q8",
+            "id": "scenarios_3_q4",
             "attributes": {
               "required": true,
-              "label": "What specific aspects of the environment (e.g., weather, crowd density) would influence your decision to help?"
+              "label": "How does the surrounding environment (e.g., presence of other workers, cleanliness of the facility) influence your decision to help the robot? What environmental information would be helpful to know?"
             }
           },
           {
             "name": "option-scale",
-            "id": "scenarios_3_q9",
+            "id": "scenarios_3_q5",
             "attributes": {
               "label": "How do the appearance and behavior of the robot affect your decision to help?",
               "description": "Using a scale of 1 to 7, please rate the influence of the robot's appearance and behavior, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
@@ -847,10 +677,18 @@ const App = () => {
           },
           {
             "name": "long-text",
-            "id": "scenarios_3_q10",
+            "id": "scenarios_3_q6",
             "attributes": {
               "required": true,
-              "label": "What specific aspects of the robot (e.g., its limitations, design) would influence your decision to help?"
+              "label": "What aspects of the robot's limitations (e.g., its inability to identify certain items) and specific needs (e.g., needing guidance on sorting) would make you more inclined to help? How should the robot convey these limitations?"
+            }
+          },
+          {
+            "name": "long-text",
+            "id": "scenarios_3_q7",
+            "attributes": {
+              "required": true,
+              "label": "How would knowing the importance and urgency of the robot's task affect your decision to help? What details would be most convincing?"
             }
           }
         ]
