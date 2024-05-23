@@ -390,6 +390,13 @@ const App = () => {
         },
         "innerBlocks": [
           {
+            "name": "tutorial-text-block_1",
+            "id": "sample_label_evaluate_robot_explain",
+            "attributes": {
+              "description": "The scenario presented may be missing information regarding the task itself, the environment, and the limitations of the robot. You will need to estimate how these factors, if known, would affect your decision to help."
+          }
+          },
+          {
             "name": "option-scale",
             "id": "scenarios_1_q1",
             "attributes": {
@@ -416,7 +423,7 @@ const App = () => {
             "id": "scenarios_1_q2",
             "attributes": {
               "required": true,
-              "label": "What information could the robot communicate to you that would increase your motivation to help? (e.g., the urgency of the situation, its current task, any rewards for helping)"
+              "label": "What information could the robot communicate to you that would increase your motivation to help? (e.g., the urgency of the situation, its current task)"
             }
           },
           {
@@ -451,7 +458,7 @@ const App = () => {
           },
           {
             "name": "long-text",
-            "id": "scenarios_1_q6",
+            "id": "scenarios_1_q5",
             "attributes": {
               "required": true,
               "label": "What aspects of the robot's limitations (e.g., its inability to move in snow) and specific needs (e.g., needing a push) would make you more inclined to help? How should the robot convey these limitations?"
@@ -459,7 +466,7 @@ const App = () => {
           },
           {
             "name": "long-text",
-            "id": "scenarios_1_q7",
+            "id": "scenarios_1_q6",
             "attributes": {
               "required": true,
               "label": "How would knowing the importance and urgency of the robot's task affect your decision to help? What details would be most convincing?"
@@ -480,6 +487,13 @@ const App = () => {
           "description": "A robot in a hospital needs to use the elevator, but due to its height, it cannot reach the elevator button and requires assistance."
         },
         "innerBlocks": [
+          {
+            "name": "tutorial-text-block_2",
+            "id": "sample_label_evaluate_robot_explain",
+            "attributes": {
+              "description": "The scenario presented may be missing information regarding the task itself, the environment, and the limitations of the robot. You will need to estimate how these factors, if known, would affect your decision to help."
+          }
+        },
           {
             "name": "option-scale",
             "id": "scenarios_2_q1",
@@ -507,7 +521,7 @@ const App = () => {
             "id": "scenarios_2_q2",
             "attributes": {
               "required": true,
-              "label": "What information could the robot communicate to you that would increase your motivation to help? (e.g., the urgency of the situation, its current task, any rewards for helping)"
+              "label": "What information could the robot communicate to you that would increase your motivation to help? (e.g., the urgency of the situation, its current task)"
             }
           },
           {
@@ -537,42 +551,20 @@ const App = () => {
             "id": "scenarios_2_q4",
             "attributes": {
               "required": true,
-              "label": "How does the surrounding environment (e.g., hospital setting, presence of other people) influence your decision to help the robot? What environmental information would be helpful to know?"
+              "label": "What environmental information would be helpful to know (e.g., weather conditions, crowd density)? "
             }
           },
           {
-            "name": "option-scale",
+            "name": "long-text",
             "id": "scenarios_2_q5",
             "attributes": {
-              "label": "How do the appearance and behavior of the robot affect your decision to help?",
-              "description": "Using a scale of 1 to 7, please rate the influence of the robot's appearance and behavior, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
               "required": true,
-              "start": 1,
-              "end": 7,
-              "startLabel": "No influence at all",
-              "endLabel": "Extremely influential",
-              "labels": {
-                "1": "No influence at all",
-                "2": "Slight influence",
-                "3": "Somewhat influential",
-                "4": "Moderately influential",
-                "5": "Very influential",
-                "6": "Highly influential",
-                "7": "Extremely influential"
-              }
+              "label": "What aspects of the robot's limitations (e.g., its inability to reach the button) and specific needs (e.g., someone to press it for him) would make you more inclined to help? How should the robot convey these limitations?"
             }
           },
           {
             "name": "long-text",
             "id": "scenarios_2_q6",
-            "attributes": {
-              "required": true,
-              "label": "What aspects of the robot's limitations (e.g., its inability to reach the button) and specific needs (e.g., needing someone to press the button) would make you more inclined to help? How should the robot convey these limitations?"
-            }
-          },
-          {
-            "name": "long-text",
-            "id": "scenarios_2_q7",
             "attributes": {
               "required": true,
               "label": "How would knowing the importance and urgency of the robot's task affect your decision to help? What details would be most convincing?"
@@ -593,6 +585,13 @@ const App = () => {
           "description": "A robot that sorts items into bins of plastic and glass encounters an object that it cannot identify and requires human assistance."
         },
         "innerBlocks": [
+          {
+            "name": "tutorial-text-block_3",
+            "id": "sample_label_evaluate_robot_explain",
+            "attributes": {
+              "description": "The scenario presented may be missing information regarding the task itself, the environment, and the limitations of the robot. You will need to estimate how these factors, if known, would affect your decision to help."
+          }
+        },
           {
             "name": "option-scale",
             "id": "scenarios_3_q1",
@@ -620,7 +619,7 @@ const App = () => {
             "id": "scenarios_3_q2",
             "attributes": {
               "required": true,
-              "label": "What information could the robot communicate to you that would increase your motivation to help? (e.g., the urgency of the situation, its current task, any rewards for helping)"
+              "label": "What information could the robot communicate to you that would increase your motivation to help? (e.g., the urgency of the situation, its current task)"
             }
           },
           {
@@ -650,42 +649,20 @@ const App = () => {
             "id": "scenarios_3_q4",
             "attributes": {
               "required": true,
-              "label": "How does the surrounding environment (e.g., presence of other workers, cleanliness of the facility) influence your decision to help the robot? What environmental information would be helpful to know?"
+              "label": "What environmental information would be helpful to know (e.g., weather conditions, crowd density)? "
             }
           },
           {
-            "name": "option-scale",
+            "name": "long-text",
             "id": "scenarios_3_q5",
             "attributes": {
-              "label": "How do the appearance and behavior of the robot affect your decision to help?",
-              "description": "Using a scale of 1 to 7, please rate the influence of the robot's appearance and behavior, with 1 being 'No influence at all' and 7 being 'Extremely influential'.",
               "required": true,
-              "start": 1,
-              "end": 7,
-              "startLabel": "No influence at all",
-              "endLabel": "Extremely influential",
-              "labels": {
-                "1": "No influence at all",
-                "2": "Slight influence",
-                "3": "Somewhat influential",
-                "4": "Moderately influential",
-                "5": "Very influential",
-                "6": "Highly influential",
-                "7": "Extremely influential"
-              }
+              "label": "What aspects of the robot's limitations (e.g., its inability to identify the item) and specific needs (e.g., someone to sort it for him) would make you more inclined to help? How should the robot convey these limitations?"
             }
           },
           {
             "name": "long-text",
             "id": "scenarios_3_q6",
-            "attributes": {
-              "required": true,
-              "label": "What aspects of the robot's limitations (e.g., its inability to identify certain items) and specific needs (e.g., needing guidance on sorting) would make you more inclined to help? How should the robot convey these limitations?"
-            }
-          },
-          {
-            "name": "long-text",
-            "id": "scenarios_3_q7",
             "attributes": {
               "required": true,
               "label": "How would knowing the importance and urgency of the robot's task affect your decision to help? What details would be most convincing?"
