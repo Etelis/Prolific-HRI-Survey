@@ -28,7 +28,7 @@ const App = () => {
     const sessionId = params.get('SESSION_ID');
 
     if (!prolificPid || !studyId || !sessionId) {
-      // redirectToProlific();
+      redirectToProlific();
     } else {
       setUrlParams({
         PROLIFIC_PID: prolificPid,
@@ -56,19 +56,16 @@ const App = () => {
         scenarios_1_q4: data.answers.scenarios_1_q4?.value,
         scenarios_1_q5: data.answers.scenarios_1_q5?.value,
         scenarios_1_q6: data.answers.scenarios_1_q6?.value,
-        scenarios_1_q7: data.answers.scenarios_1_q7?.value,
         scenarios_2_q1: data.answers.scenarios_2_q1?.value,
         scenarios_2_q3: data.answers.scenarios_2_q3?.value,
         scenarios_2_q4: data.answers.scenarios_2_q4?.value,
         scenarios_2_q5: data.answers.scenarios_2_q5?.value,
         scenarios_2_q6: data.answers.scenarios_2_q6?.value,
-        scenarios_2_q7: data.answers.scenarios_2_q7?.value,
         scenarios_3_q1: data.answers.scenarios_3_q1?.value,
         scenarios_3_q3: data.answers.scenarios_3_q3?.value,
         scenarios_3_q4: data.answers.scenarios_3_q4?.value,
         scenarios_3_q5: data.answers.scenarios_3_q5?.value,
         scenarios_3_q6: data.answers.scenarios_3_q6?.value,
-        scenarios_3_q7: data.answers.scenarios_3_q7?.value,
         additional_factors: data.answers.additional_factors?.value,
         definite_help_situation: data.answers.definite_help_situation?.value,
         definitions_clear_question: data.answers.definitions_clear_question?.value,
@@ -103,7 +100,7 @@ const App = () => {
 <Form onFinish={handleFinishPageComplete} />
 
 
-  const definitionsClear = useFieldAnswer("definitions-clear-question");
+  const definitionsClear = useFieldAnswer("definitions_clear_question");
   const getFormBlocks = () => {
     const preDynamicBlocks = [
       {
@@ -390,10 +387,10 @@ const App = () => {
         },
         "innerBlocks": [
           {
-            "name": "tutorial-text-block_1",
-            "id": "sample_label_evaluate_robot_explain",
+            "name": "tutorial-text-block",
+            "id": "sample_label_evaluate_robot_explain_1",
             "attributes": {
-              "description": "The scenario presented may be missing information regarding the task itself, the environment, and the limitations of the robot. You will need to estimate how these factors, if known, would affect your decision to help."
+              "text": "The scenario presented may be missing information regarding the task itself, the environment, and the limitations of the robot. You will need to estimate how these factors, if known, would affect your decision to help."
           }
           },
           {
@@ -488,10 +485,10 @@ const App = () => {
         },
         "innerBlocks": [
           {
-            "name": "tutorial-text-block_2",
-            "id": "sample_label_evaluate_robot_explain",
+            "name": "tutorial-text-block",
+            "id": "sample_label_evaluate_robot_explain_2",
             "attributes": {
-              "description": "The scenario presented may be missing information regarding the task itself, the environment, and the limitations of the robot. You will need to estimate how these factors, if known, would affect your decision to help."
+              "text": "The scenario presented may be missing information regarding the task itself, the environment, and the limitations of the robot. You will need to estimate how these factors, if known, would affect your decision to help."
           }
         },
           {
@@ -586,8 +583,8 @@ const App = () => {
         },
         "innerBlocks": [
           {
-            "name": "tutorial-text-block_3",
-            "id": "sample_label_evaluate_robot_explain",
+            "name": "tutorial-text-block",
+            "id": "sample_label_evaluate_robot_explain_3",
             "attributes": {
               "description": "The scenario presented may be missing information regarding the task itself, the environment, and the limitations of the robot. You will need to estimate how these factors, if known, would affect your decision to help."
           }
